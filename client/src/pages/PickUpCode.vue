@@ -1,9 +1,8 @@
 <template>
-  <q-page>
+  <q-page class="bgimg-pickup-1">
     <div class="flex flex-center">
-      <img @click="nextPage()" alt="Quasar logo" src="~assets/PickUp/02-Pick-Up.png" />
-      <div class="q-pa-md body">
-        <div class="row">
+      <div class="q-pa-md">
+        <div class="row" style="padding-top:150px;">
           <table align="center">
             <tbody>
               <tr>
@@ -46,10 +45,14 @@
 </template>
 
 <style>
-.body {
-  position: absolute;
-  padding-top: 80px;
+.bgimg-pickup-1 {
+  background: url("/assets/PickUp/02-Pick-Up.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
+
 td {
   width: 100px;
   font-size: 25px;

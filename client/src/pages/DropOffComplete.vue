@@ -2,12 +2,10 @@
   <q-page class="bgimg-dropoff-5">
     <div class="flex flex-center">
       <div class="q-pa-md body">
-        <div class="row">
+        <div class="row" style="padding-top:900px;">
           <b class="text-h5 content">
             กรุณานำผ้าไปใส่ในช่อง {{ lockerNo }} แล้วกรอกจำนวนผ้าในใบงาน
             <br />ที่อยู่ในช่องล๊อคเกอร์
-            <br />Please fill in your contact detail and amount of items
-            <br />on the order form in the lockers
           </b>
         </div>
       </div>
@@ -58,7 +56,7 @@ export default {
         // When you want to cancel it:
         clearInterval(handle);
         handle = 0; // I just do this so I know I've cleared the interval
-      }, 5000);
+      }, 10000);
     }
   }
 };

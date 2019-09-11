@@ -1,14 +1,12 @@
 <template>
   <q-page class="flex flex-center">
     <div class="flex flex-center">
-      <img alt="Quasar logo" src="~assets/Pickup/05-Pick-Up.png" />
+      <img alt="Quasar logo" src="~assets/Pickup/04-Pick-Up.png" />
       <div class="q-pa-md body">
         <div class="row">
           <b class="text-h5 content">
             รับผ้าของคุณได้ที่ล็อคเกอร์<br/>
             หมายเลข {{ lockerNo }}
-            <br />
-            Get your items at the lockers Number {{ lockerNo }}
           </b>
         </div>
       </div>
@@ -50,7 +48,7 @@ export default {
         // When you want to cancel it:
         clearInterval(handle);
         handle = 0; // I just do this so I know I've cleared the interval
-      }, 5000);
+      }, 10000);
     }
   }
 };

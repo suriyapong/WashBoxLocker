@@ -85,7 +85,7 @@ export default {
             }
           });
       }else{
-        this.$router.push({ path: `/pickupconfirm` });
+        this.$router.push({ path: `/pickupcode` });
       }
     }
   }

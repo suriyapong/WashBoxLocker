@@ -1,37 +1,36 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="bgimg-pickup-2">
     <div class="flex flex-center">
-      <img alt="Quasar logo" src="~assets/PickUp/04-Pick-Up.png" />
       <div class="q-pa-md body">
         <div class="row">
           <table>
             <tbody>
               <tr>
-                <td align="center">{{ lockerNo }}</td>
+                <td align="center" style="font-size:130px; padding-top:270px; padding-left:30px;">{{ lockerNo }}</td>
+              </tr>
+              <tr>
+                <td align="center" style="padding-top:100px; padding-left:30px;">
+                  <img @click="ok()" src="~assets/PickUp/03-Pick-Up-btn1.png" />
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="q-pa-md footer">
-        <div class="row">
-          <img @click="ok()" src="~assets/PickUp/04-Pick-Up-btn1.png" />
-        </div>
+      <div class="q-pa-md">
+        <div class="row" style="padding-top:550px;"></div>
       </div>
     </div>
   </q-page>
 </template>
 
 <style>
-.body {
-  position: absolute;
-  padding-top: 0px;
-  font-size: 60px;
-}
-.footer {
-  position: absolute;
-  padding-top: 380px;
-  font-size: 60px;
+.bgimg-pickup-2 {
+  background: url("/assets/PickUp/03-Pick-Up.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 </style>
 
@@ -50,7 +49,6 @@ export default {
   },
   methods: {
     async ok() {
- 
       //clear locker
       const q = {};
       q.Cmd = "ClearPickUp";
