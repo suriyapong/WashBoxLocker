@@ -180,7 +180,7 @@ exports.CustomService = class CustomService {
 
     let clearLocker = await locker.query().where('LockerID', lockerNo).where('Active', 1).where('Type', "pickup");
     if (clearLocker.length > 0) {
-      const numberOfEditedRows = await locker.query().where('LockerID', clearLocker[0].LockerID).patch({ Active: 0, StartTime: null, TelNo: null, Type: null, JobCode: null });
+      const numberOfEditedRows = await locker.query().where('LockerID', clearLocker[0].LockerID).patch({ Active: 0, StartTime: null, TelNo: null, Type: null, OTP : null, JobCode: null });
       if (numberOfEditedRows > 0) {
         status = true;
       }
