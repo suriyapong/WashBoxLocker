@@ -1,10 +1,10 @@
 <template>
-  <q-page class="bgimg" @click="nextPage()">
+  <q-page class="bgimg-dropoff-1" @click="nextPage()">
   </q-page>
 </template>
 
 <style>
-.bgimg {
+.bgimg-dropoff-1 {
   background: url("/assets/DropOff/01-Drop-Off.png") no-repeat center center
     fixed;
   -webkit-background-size: cover;

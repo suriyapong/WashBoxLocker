@@ -41,7 +41,7 @@ export default {
   data: () => ({
     //--start config
     service: "locker",
-    lockerNo: "",
+    lockerNo: ""
     //--end config
   }),
   props: ["LockerNo"],
@@ -50,7 +50,20 @@ export default {
   },
   methods: {
     async ok() {
-      this.$router.push({ path: `/pickupcomplete/${this.LockerNo}` });
+ 
+      //clear locker
+      const q = {};
+      q.Cmd = "ClearPickUp";
+      q.LockerNo = this.lockerNo;
+      this.$store.dispatch("custom-service/find", { query: q }).then(result => {
+        var res = [];
+        console.log(result[0].Status);
+        if (result[0].Status) {
+          this.$router.push({ path: `/pickupcomplete/${this.lockerNo}` });
+        } else {
+          this.$router.push({ path: `/` });
+        }
+      });
     }
   }
 };

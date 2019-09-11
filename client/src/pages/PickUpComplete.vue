@@ -5,8 +5,7 @@
       <div class="q-pa-md body">
         <div class="row">
           <b class="text-h5 content">
-            รับผ้าของคุณได้ที่ล็อคเกอร์
-            <br/>
+            รับผ้าของคุณได้ที่ล็อคเกอร์<br/>
             หมายเลข {{ lockerNo }}
             <br />
             Get your items at the lockers Number {{ lockerNo }}

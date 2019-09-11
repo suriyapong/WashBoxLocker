@@ -72,21 +72,27 @@ export default {
   async mounted() {},
   methods: {
     codeNo(no) {
-      if(this.formModel.OTP.length < 4){
-      this.formModel.OTP = this.formModel.OTP + no;
+      if (this.formModel.OTP.length < 4) {
+        this.formModel.OTP = this.formModel.OTP + no;
       }
     },
     async ok() {
       if (this.formModel.OTP.length == 4) {
         //check OTP
-        let lockerId = 11;
         const q = {};
-        q.LockerId = lockerId;
-        await this.$store
-          .dispatch("clean-drop-off/find", { query: q })
+        q.Cmd = "CheckCodePickUp";
+        q.Code = this.formModel.OTP;
+        this.$store
+          .dispatch("custom-service/find", { query: q })
           .then(result => {
-            console.log("Clear locker : " + result[0].Status);
-            this.$router.push({ path: `/pickuplockernumber/${lockerId}` });
+            var res = [];
+            if (result[0].LockerNo != 0) {
+              this.$router.push({
+                path: `/pickuplockernumber/${result[0].LockerNo}`
+              });
+            } else {
+              this.$router.push({ path: `/` });
+            }
           });
       }
     }

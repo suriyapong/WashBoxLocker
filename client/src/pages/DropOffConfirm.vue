@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bgimg">
+  <q-page class="bgimg-dropoff-3">
     <div class="flex flex-center">
       <div class="q-pa-md" style="padding-top:400px;">
         <div class="row">
@@ -30,7 +30,7 @@
 </template>
 
 <style>
-.bgimg {
+.bgimg-dropoff-3 {
   background: url("/assets/DropOff/04-Drop-Off.png") no-repeat center center
     fixed;
   -webkit-background-size: cover;

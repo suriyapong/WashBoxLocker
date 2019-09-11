@@ -1,7 +1,6 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="bgimg-dropoff-5">
     <div class="flex flex-center">
-      <img alt="Quasar logo" src="~assets/DropOff/07-Drop-Off.png" />
       <div class="q-pa-md body">
         <div class="row">
           <b class="text-h5 content">
@@ -26,6 +25,15 @@
   text-align: center;
   font-size: 32px;
   color: aliceblue;
+}
+
+.bgimg-dropoff-5 {
+  background: url("/assets/DropOff/07-Drop-Off.png") no-repeat center center
+    fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 </style>
 
