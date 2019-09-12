@@ -6,6 +6,7 @@ exports.CustomService = class CustomService {
 
   async find(params) {
     console.log("cmd : " + params.query.cmd);
+    console.log("LockerNo : " + params.query.LockerNo);
     let cmd = params.query.cmd;
     //case 2
     let telephone = params.query.Tel;
@@ -19,18 +20,19 @@ exports.CustomService = class CustomService {
 
 
     switch (cmd) {
-      case "CheckAvilable":
-        let result = await this.execCheckAvailable();
-        console.log("execCheckAvailable : " + JSON.stringify(result));
-        return result;
+      // case "CheckAvilable":
+      //   let result = await this.execCheckAvailable();
+      //   console.log("execCheckAvailable : " + JSON.stringify(result));
+      //   return result;
       // case "SetDropOff":
       //   let result = await this.execSetDropOff(telephone);
       //   console.log("execSetDropOff : " + result[0].LockerNo);
       //   return result;
-      // case "ClearDropOff":
-      //   let result = await this.execClearDropOff(lockerNo);
-      //   console.log("execClearDropOff : " + result[0].LockerNo);
-      //   return result;
+      case "ClearDropOff":
+        console.log("Start ClearDropOff")
+        let result = await this.execClearDropOff(lockerNo);
+        console.log("execClearDropOff : " + result[0].LockerNo);
+        return result;
       // case "SetPickUp":
       //   let result = await this.execSetPickUp(lockerNo, jobCode);
       //   console.log("execSetPickUp : " + result[0].LockerNo);
