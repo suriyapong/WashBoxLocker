@@ -29,7 +29,7 @@
   </q-page>
 </template>
 
-<style>
+<style scoped>
 .bgimg-dropoff-3 {
   background: url("/assets/DropOff/04-Drop-Off.png") no-repeat center center
     fixed;

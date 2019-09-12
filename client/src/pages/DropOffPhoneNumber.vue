@@ -2,7 +2,7 @@
   <q-page class="bgimg-dropoff-4">
     <div class="flex flex-center" style="padding-top:20px;">
       <div class="q-pa-md">
-        <div class="row" style="width:1210px; padding-top:200px">
+        <div class="row" style="width:1210px; padding-top:175px">
           <div class="col-5" style="padding-top:55px; padding-left:85px;">
             <table>
               <tbody>
@@ -51,7 +51,7 @@
               </tbody>
             </table>
           </div>
-          <div class="col-7" align="center" style="padding-top:135px;">
+          <div class="col-7" align="center" style="padding-top:170px;">
             <!-- <b class="text-h2" style="color:red">{{ formModel.TelNo }}</b> -->
             <q-input
               class="text-h2"
@@ -59,7 +59,7 @@
               v-model="formModel.TelNo"
               mask="### ### ####"
             />
-            <p style="padding-top:60px;">
+            <p style="padding-top:100px;">
               <img @click="ok()" src="~assets/DropOff/05-Drop-Off-btn1.png" />
             </p>
           </div>
@@ -69,7 +69,7 @@
   </q-page>
 </template>
 
-<style>
+<style scoped>
 .bgimg-dropoff-4 {
   background: url("/assets/DropOff/05-Drop-Off.png") no-repeat center center
     fixed;
@@ -121,11 +121,20 @@ export default {
       this.formModel.TelNo = this.formModel.TelNo + no;
     },
     deleteTelephoneNo() {
-      //alert(this.formModel.TelNo.length);
-      this.formModel.TelNo = this.formModel.TelNo.substring(
-        0,
-        this.formModel.TelNo.length - 1
-      );
+      if (
+        this.formModel.TelNo.length == 4 ||
+        this.formModel.TelNo.length == 8
+      ) {
+        this.formModel.TelNo = this.formModel.TelNo.substring(
+          0,
+          this.formModel.TelNo.length - 2
+        );
+      } else {
+        this.formModel.TelNo = this.formModel.TelNo.substring(
+          0,
+          this.formModel.TelNo.length - 1
+        );
+      }
     },
     async ok() {
       try {

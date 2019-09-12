@@ -24,7 +24,7 @@ export default function (/* { ssrContext } */) {
       service('check-available', { idField: 'Id' }),
       service('drop-off', { idField: 'Id' }),
       service('clean-drop-off', { idField: 'Id' }),
-      service('custom-service', { idField: 'Id' }),
+      service('custom-service'),
     ],
 
     // enable strict mode (adds overhead!)

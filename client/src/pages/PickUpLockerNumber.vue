@@ -24,7 +24,7 @@
   </q-page>
 </template>
 
-<style>
+<style scoped>
 .bgimg-pickup-2 {
   background: url("/assets/PickUp/03-Pick-Up.png") no-repeat center center fixed;
   -webkit-background-size: cover;

@@ -14,7 +14,7 @@
   </q-page>
 </template>
 
-<style>
+<style scoped>
 .body {
   position: absolute;
   padding-top: 300px;

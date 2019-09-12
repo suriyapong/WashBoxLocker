@@ -3,7 +3,7 @@
   </q-page>
 </template>
 
-<style>
+<style scoped>
 .bgimg-dropoff-1 {
   background: url("/assets/DropOff/01-Drop-Off.png") no-repeat center center
     fixed;

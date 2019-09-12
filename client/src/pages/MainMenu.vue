@@ -29,7 +29,7 @@
   </q-page>
 </template>
 
-<style>
+<style scoped>
 td {
   width: 250px;
   font-size: 25px;
@@ -56,35 +56,18 @@ export default {
   methods: {
     async choose(choice) {
       if (choice == 1) {
-        //check ว่าง
-        // const q = {};
-        // this.$store
-        //   .dispatch("check-available/find", { query: q })
-        //   .then(result => {
-        //     var res = [];
-        //     console.log(result[0].Status);
-        //     if(result[0].Status){
-        //       this.$router.push({ path: `/dropoffconfirm` });
-        //     }else{
-        //       this.$router.push({ path: `/lockernotavailable` });
-        //     }
-        //   });
-
         const q = {};
-        q.Cmd = "CheckAvilable";
-        q.Tel = "";
-        this.$store
-          .dispatch("custom-service/find", { query: q })
-          .then(result => {
-            var res = [];
-            console.log(result[0].Status);
-            if (result[0].Status) {
-              this.$router.push({ path: `/dropoffconfirm` });
-            } else {
-              this.$router.push({ path: `/lockernotavailable` });
-            }
-          });
-      }else{
+        q.cmd = "CheckAvilable";
+        let result = await this.$store.dispatch("custom-service/find", {
+          query: q
+        });
+        console.log("Status : " + result[0].Status);
+        if (result[0].Status) {
+          this.$router.push({ path: `/dropoffconfirm` });
+        } else {
+          this.$router.push({ path: `/lockernotavailable` });
+        }
+      } else {
         this.$router.push({ path: `/pickupcode` });
       }
     }
