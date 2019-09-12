@@ -5,7 +5,8 @@ exports.CustomService = class CustomService {
   }
 
   async find(params) {
-    let cmd = params.query.Cmd;
+    console.log("cmd : " + params.query.cmd);
+    let cmd = params.query.cmd;
     //case 2
     let telephone = params.query.Tel;
 
@@ -16,66 +17,96 @@ exports.CustomService = class CustomService {
     //case 5
     let code = params.query.Code;
 
-    //case 1
-    if (cmd == "CheckAvilable") {
-      let result = await this.execCheckAvailable();
-      console.log("Status : " + result[0].Status);
 
-      return result;
+    switch (cmd) {
+      case "CheckAvilable":
+        let result = await this.execCheckAvailable();
+        console.log("execCheckAvailable : " + JSON.stringify(result));
+        return result;
+      // case "SetDropOff":
+      //   let result = await this.execSetDropOff(telephone);
+      //   console.log("execSetDropOff : " + result[0].LockerNo);
+      //   return result;
+      // case "ClearDropOff":
+      //   let result = await this.execClearDropOff(lockerNo);
+      //   console.log("execClearDropOff : " + result[0].LockerNo);
+      //   return result;
+      // case "SetPickUp":
+      //   let result = await this.execSetPickUp(lockerNo, jobCode);
+      //   console.log("execSetPickUp : " + result[0].LockerNo);
+      //   return result;
+      // case "CheckCodePickUp":
+      //   let result = await this.execCheckCodePickUp(code);
+      //   console.log("execCheckCodePickUp : " + result[0].LockerNo);
+      //   return result;
+      // case "ClearPickUp":
+      //   let result = await this.execClearPickUp(lockerNo);
+      //   console.log("execClearPickUp : " + result[0].LockerNo);
+      //   return result;
     }
 
-    //case 2
-    if (cmd == "SetDropOff") {
-      let result = await this.execSetDropOff(telephone);
-      console.log("LockerNo : " + result[0].LockerNo);
-      return result;
-    }
 
-    //case 3 Only Application
-    if (cmd == "ClearDropOff") {
-      let result = await this.execClearDropOff(lockerNo);
-      console.log("LockerNo : " + result[0].LockerNo);
+    // //case 1
+    // if (cmd == "CheckAvilable") {
+    //   let result = await this.execCheckAvailable();
+    //   console.log("Status : " + result[0].Status);
 
-      return result;
-    }
+    //   return result;
+    // }
 
-    //case 4 Only Application
-    if (cmd == "SetPickUp") {
-      let result = await this.execSetPickUp(lockerNo, jobCode);
-      console.log("LockerNo : " + result[0].LockerNo);
+    // //case 2
+    // if (cmd == "SetDropOff") {
+    //   let result = await this.execSetDropOff(telephone);
+    //   console.log("LockerNo : " + result[0].LockerNo);
+    //   return result;
+    // }
 
-      return result;
-    }
+    // //case 3 Only Application
+    // if (cmd == "ClearDropOff") {
+    //   let result = await this.execClearDropOff(lockerNo);
+    //   console.log("LockerNo : " + result[0].LockerNo);
+    //   return result;
+    // }
 
-    //case 5
-    if (cmd == "CheckCodePickUp") {
-      let result = await this.execCheckCodePickUp(code);
-      console.log("LockerNo : " + result[0].LockerNo);
+    // //case 4 Only Application
+    // if (cmd == "SetPickUp") {
+    //   let result = await this.execSetPickUp(lockerNo, jobCode);
+    //   console.log("LockerNo : " + result[0].LockerNo);
+    //   return result;
+    // }
 
-      return result;
-    }
+    // //case 5
+    // if (cmd == "CheckCodePickUp") {
+    //   let result = await this.execCheckCodePickUp(code);
+    //   console.log("LockerNo : " + result[0].LockerNo);
+    //   return result;
+    // }
 
-    //case 6
-    if (cmd == "ClearPickUp") {
-      let result = await this.execClearPickUp(lockerNo);
-      console.log("LockerNo : " + result[0].LockerNo);
+    // //case 6
+    // if (cmd == "ClearPickUp") {
+    //   let result = await this.execClearPickUp(lockerNo);
+    //   console.log("LockerNo : " + result[0].LockerNo);
 
-      return result;
-    }
+    //   return result;
+    // }
   }
 
-  async get(id, params) {
-    //let tel = data.Tel;
-    console.log(id);
-    console.log(params.query.Tel);
+  // async patch(id, data, params) {
+  //   console.log(id);
+  //   console.log(data);
 
-    return [{ "Status": 1 }];
-  }
-  async patch(id, data, params) {
-    console.log(id);
-    console.log(data);
-    return id;
-  }
+  //   switch (id) {
+  //     case "CheckAvilable":
+  //       let result = await this.execCheckAvailable(data);
+  //       console.log("execCheckAvailable : " + JSON.stringify(result));
+  //       return result;
+  //     case 1:
+  //       day = "Monday";
+  //       break;
+  //   }
+
+  //   return id;
+  // }
 
   //case 1
   async execCheckAvailable() {
@@ -180,7 +211,7 @@ exports.CustomService = class CustomService {
 
     let clearLocker = await locker.query().where('LockerID', lockerNo).where('Active', 1).where('Type', "pickup");
     if (clearLocker.length > 0) {
-      const numberOfEditedRows = await locker.query().where('LockerID', clearLocker[0].LockerID).patch({ Active: 0, StartTime: null, TelNo: null, Type: null, OTP : null, JobCode: null });
+      const numberOfEditedRows = await locker.query().where('LockerID', clearLocker[0].LockerID).patch({ Active: 0, StartTime: null, TelNo: null, Type: null, OTP: null, JobCode: null });
       if (numberOfEditedRows > 0) {
         status = true;
       }
