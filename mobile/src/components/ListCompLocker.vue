@@ -63,11 +63,11 @@ export default {
       }
 
       if (type == "dropoff") {
-        typeName = "ลูกค้านำผ้ามาซัก";
+        typeName = "ฝากซัก";
       }
 
       if (type == "pickup") {
-        typeName = "ผ้าพร้อมส่งคืนลูกค้า";
+        typeName = "คืนลูกค้า";
       }
 
       return typeName;

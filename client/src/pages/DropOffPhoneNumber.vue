@@ -103,6 +103,7 @@ td {
 
 <script>
 import { mapState } from "vuex";
+import feathersClient from "../plugins/feathers-client";
 
 export default {
   name: "DropOffPhoneNumber",
@@ -140,11 +141,11 @@ export default {
       try {
         if (this.formModel.TelNo.length >= 10) {
           // const q = {};
+          // q.cmd = "SetDropOff";
           // q.Telephone = this.formModel.TelNo;
           // await this.$store
-          //   .dispatch("drop-off/find", { query: q })
+          //   .dispatch("custom-service/find", { query: q })
           //   .then(result => {
-          //     console.log(JSON.stringify(result));
           //     if (result[0].LockerNo != 0) {
           //       this.$router.push({
           //         path: `/dropofflockernumber/${result[0].LockerNo}`
@@ -154,12 +155,11 @@ export default {
           //     }
           //   });
 
-          const q = {};
-          q.Cmd = "SetDropOff";
-          q.Tel = this.formModel.TelNo;
-          await this.$store
-            .dispatch("custom-service/find", { query: q })
+          feathersClient
+            .service("wash-box-service")
+            .patch("SetDropOff", { Telephone: this.formModel.TelNo })
             .then(result => {
+              console.log(result[0].LockerNo);
               if (result[0].LockerNo != 0) {
                 this.$router.push({
                   path: `/dropofflockernumber/${result[0].LockerNo}`

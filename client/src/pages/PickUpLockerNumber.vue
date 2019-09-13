@@ -6,7 +6,10 @@
           <table>
             <tbody>
               <tr>
-                <td align="center" style="font-size:130px; padding-top:270px; padding-left:30px;">{{ lockerNo }}</td>
+                <td
+                  align="center"
+                  style="font-size:130px; padding-top:270px; padding-left:30px;"
+                >{{ lockerNo }}</td>
               </tr>
               <tr>
                 <td align="center" style="padding-top:100px; padding-left:30px;">
@@ -35,6 +38,8 @@
 </style>
 
 <script>
+import feathersClient from "../plugins/feathers-client";
+
 export default {
   name: "PickUpComplete",
   data: () => ({
@@ -50,18 +55,30 @@ export default {
   methods: {
     async ok() {
       //clear locker
-      const q = {};
-      q.Cmd = "ClearPickUp";
-      q.LockerNo = this.lockerNo;
-      this.$store.dispatch("custom-service/find", { query: q }).then(result => {
-        var res = [];
-        console.log(result[0].Status);
-        if (result[0].Status) {
-          this.$router.push({ path: `/pickupcomplete/${this.lockerNo}` });
-        } else {
-          this.$router.push({ path: `/` });
-        }
-      });
+      // const q = {};
+      // q.cmd = "ClearPickUp";
+      // q.LockerNo = this.lockerNo;
+      // this.$store.dispatch("custom-service/find", { query: q }).then(result => {
+      //   var res = [];
+      //   console.log(result[0].Status);
+      //   if (result[0].Status) {
+      //     this.$router.push({ path: `/pickupcomplete/${this.lockerNo}` });
+      //   } else {
+      //     this.$router.push({ path: `/` });
+      //   }
+      // });
+
+      feathersClient
+        .service("wash-box-service")
+        .patch("ClearPickUp", { LockerID : this.lockerNo})
+        .then(result => {
+          console.log(result[0].Status);
+          if (result[0].Status) {
+            this.$router.push({ path: `/pickupcomplete/${this.lockerNo}` });
+          } else {
+            this.$router.push({ path: `/` });
+          }
+        });
     }
   }
 };

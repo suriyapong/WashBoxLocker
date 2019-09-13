@@ -60,6 +60,8 @@ td {
 </style>
 
 <script>
+import feathersClient from "../plugins/feathers-client";
+
 export default {
   name: "Drop-Off-1",
   data: () => ({
@@ -80,18 +82,32 @@ export default {
       }
     },
     async ok() {
-      if (this.formModel.OTP.length == 4) {
+      if (this.formModel.OTP.length >= 4) {
         //check OTP
-        const q = {};
-        q.Cmd = "CheckCodePickUp";
-        q.Code = this.formModel.OTP;
-        this.$store
-          .dispatch("custom-service/find", { query: q })
+        // const q = {};
+        // q.cmd = "CheckCodePickUp";
+        // q.Code = this.formModel.OTP;
+        // this.$store
+        //   .dispatch("custom-service/find", { query: q })
+        //   .then(result => {
+        //     var res = [];
+        //     if (result[0].LockerNo != 0) {
+        //       this.$router.push({
+        //         path: `/pickuplockernumber/${result[0].LockerNo}`
+        //       });
+        //     } else {
+        //       this.$router.push({ path: `/` });
+        //     }
+        //   });
+
+        feathersClient
+          .service("wash-box-service")
+          .patch("CheckCodePickUp", { OTP: this.formModel.OTP })
           .then(result => {
-            var res = [];
-            if (result[0].LockerNo != 0) {
+            console.log(result[0].LockerID);
+            if (result[0].LockerID != 0) {
               this.$router.push({
-                path: `/pickuplockernumber/${result[0].LockerNo}`
+                path: `/pickuplockernumber/${result[0].LockerID}`
               });
             } else {
               this.$router.push({ path: `/` });

@@ -46,6 +46,8 @@ td {
 </style>
 
 <script>
+import feathersClient from "../plugins/feathers-client";
+
 export default {
   data: () => ({
     //--start config
@@ -56,17 +58,15 @@ export default {
   methods: {
     async choose(choice) {
       if (choice == 1) {
-        const q = {};
-        q.cmd = "CheckAvilable";
-        let result = await this.$store.dispatch("custom-service/find", {
-          query: q
-        });
-        console.log("Status : " + result[0].Status);
-        if (result[0].Status) {
-          this.$router.push({ path: `/dropoffconfirm` });
-        } else {
-          this.$router.push({ path: `/lockernotavailable` });
-        }
+        feathersClient
+          .service("wash-box-service")
+          .patch("CheckAvilable", {})
+          .then(result => {
+            console.log(result[0].Status);
+            if(result[0].Status){
+              this.$router.push({ path: `/dropoffconfirm` });
+            }
+          });
       } else {
         this.$router.push({ path: `/pickupcode` });
       }

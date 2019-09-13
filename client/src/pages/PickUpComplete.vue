@@ -6,7 +6,8 @@
         <div class="row">
           <b class="text-h5 content">
             รับผ้าของคุณได้ที่ล็อคเกอร์<br/>
-            หมายเลข {{ lockerNo }}
+            หมายเลข {{ lockerNo }}<br/>
+            Get your items at the lockers Number {{ lockerNo }}
           </b>
         </div>
       </div>
@@ -17,7 +18,7 @@
 <style scoped>
 .body {
   position: absolute;
-  padding-top: 300px;
+  padding-top: 400px;
   font-size: 60px;
 }
 .content {
@@ -48,7 +49,7 @@ export default {
         // When you want to cancel it:
         clearInterval(handle);
         handle = 0; // I just do this so I know I've cleared the interval
-      }, 10000);
+      }, 10*1000);
     }
   }
 };
