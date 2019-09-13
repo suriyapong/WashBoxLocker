@@ -11,13 +11,13 @@ import { FeathersVuexFind, FeathersVuexGet } from 'feathers-vuex'
 //const url = process.env.VUE_APP_SERVER_API
 //const url = "http://192.168.111.19:3030/"
 //const url = "http://localhost:3030/"
-// const url = "http://192.168.18.35:3030/"
-const url = "http://192.168.1.102:3030/"
+const url = "http://192.168.18.38:3030/"
+// const url = "http://192.168.1.102:3030/"
 console.log(url)
-const socket = io(url, {transports: ['websocket']})
+const socket = io(url, { transports: ['websocket'] })
 
 Vue.component('feathers-vuex-find', FeathersVuexFind)
-Vue.component('feathers-vuex-get', FeathersVuexGet) 
+Vue.component('feathers-vuex-get', FeathersVuexGet)
 
 const feathersClient = feathers()
   .configure(socketio(socket))
