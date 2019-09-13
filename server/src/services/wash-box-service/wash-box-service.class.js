@@ -1,112 +1,51 @@
 /* eslint-disable no-unused-vars */
-exports.CustomService = class CustomService {
+exports.WashBoxService = class WashBoxService {
   constructor(options) {
     this.options = options || {};
   }
 
-
-  patch(id, data, params) {
+  async patch(id, data, params) {
     //case 1
     if (id == "CheckAvilable") {
-      let result = this.execCheckAvailable();
+      let result = await this.execCheckAvailable();
       return result;
     }
 
     //case 2
     if (id == "SetDropOff") {
-      let result = this.execSetDropOff();
+      let result = await this.execSetDropOff(data);
       return result;
     }
 
-    ////case 3 Only Application
-    // if (id == "ClearDropOff") {
-    //   let result = await this.execClearDropOff(lockerNo);
-    //   console.log("LockerNo : " + result[0].LockerNo);
-    //   return result;
-    // }
+    //case 3 Only Application
+    if (id == "ClearDropOff") {
+      let result = await this.execClearDropOff(data);
+      console.log("Status : " + result[0].Status);
+      return result;
+    }
 
-    // //case 4 Only Application
-    // if (id == "SetPickUp") {
-    //   let result = await this.execSetPickUp(lockerNo, jobCode);
-    //   console.log("LockerNo : " + result[0].LockerNo);
-    //   return result;
-    // }
+    //case 4 Only Application
+    if (id == "SetPickUp") {
+      let result = await this.execSetPickUp(data);
+      console.log("LockerID : " + result[0].LockerID);
+      return result;
+    }
 
-    // //case 5
-    // if (id == "CheckCodePickUp") {
-    //   let result = await this.execCheckCodePickUp(code);
-    //   console.log("LockerNo : " + result[0].LockerNo);
-    //   return result;
-    // }
+    //case 5
+    if (id == "CheckCodePickUp") {
+      let result = await this.execCheckCodePickUp(data);
+      console.log("LockerID : " + result[0].LockerID);
+      return result;
+    }
 
-    // //case 6
-    // if (id == "ClearPickUp") {
-    //   let result = await this.execClearPickUp(lockerNo);
-    //   console.log("LockerNo : " + result[0].LockerNo);
+    //case 6
+    if (id == "ClearPickUp") {
+      let result = await this.execClearPickUp(data);
+      console.log("Status : " + result[0].Status);
 
-    //   return result;
-    // }
-
+      return result;
+    }
   }
-
-  // async find(params) {
-  //   console.log("cmd : " + params.query.cmd);
-  //   console.log("LockerNo : " + params.query.LockerNo);
-  //   let cmd = params.query.cmd;
-  //   //case 2
-  //   let telephone = params.query.Tel;
-
-  //   //case 3 case 4 case 6
-  //   let lockerNo = params.query.LockerNo;
-  //   //case 4
-  //   let jobCode = params.query.JobCode;
-  //   //case 5
-  //   let code = params.query.Code;
-
-  //   //case 1
-  //   if (cmd == "CheckAvilable") {
-  //     let result = await this.execCheckAvailable();
-  //     console.log("Status : " + result[0].Status);
-
-  //     return result;
-  //   }
-
-  //   //case 2
-  //   if (cmd == "SetDropOff") {
-  //     let result = await this.execSetDropOff(telephone);
-  //     console.log("LockerNo : " + result[0].LockerNo);
-  //     return result;
-  //   }
-
-  //   //case 3 Only Application
-  //   if (cmd == "ClearDropOff") {
-  //     let result = await this.execClearDropOff(lockerNo);
-  //     console.log("LockerNo : " + result[0].LockerNo);
-  //     return result;
-  //   }
-
-  //   //case 4 Only Application
-  //   if (cmd == "SetPickUp") {
-  //     let result = await this.execSetPickUp(lockerNo, jobCode);
-  //     console.log("LockerNo : " + result[0].LockerNo);
-  //     return result;
-  //   }
-
-  //   //case 5
-  //   if (cmd == "CheckCodePickUp") {
-  //     let result = await this.execCheckCodePickUp(code);
-  //     console.log("LockerNo : " + result[0].LockerNo);
-  //     return result;
-  //   }
-
-  //   //case 6
-  //   if (cmd == "ClearPickUp") {
-  //     let result = await this.execClearPickUp(lockerNo);
-  //     console.log("LockerNo : " + result[0].LockerNo);
-
-  //     return result;
-  //   }
-  // }
 
   //case 1
   async execCheckAvailable() {
@@ -124,8 +63,9 @@ exports.CustomService = class CustomService {
   }
 
   //case 2
-  async execSetDropOff(telephone) {
+  async execSetDropOff(data) {
     let lockerNo = 0;
+    let telephone = data.Telephone;
     const locker = require('../../models/locker.model')();
 
     let checkTelephone = await locker.query().where('Active', 1).where('TelNo', telephone);
@@ -159,13 +99,14 @@ exports.CustomService = class CustomService {
   }
 
   //case 3 Only Application
-  async execClearDropOff(lockerNo) {
+  async execClearDropOff(data) {
     let status = false;
-    console.log("Locker No : " + lockerNo);
+    let lockerID = data.LockerID;
+    console.log("LockerID : " + lockerID);
 
     const locker = require('../../models/locker.model')();
 
-    let checkLocker = await locker.query().where('LockerID', lockerNo).where('Active', 1);
+    let checkLocker = await locker.query().where('LockerID', lockerID).where('Active', 1);
     if (checkLocker.length > 0) {
       const numberOfEditedRows = await locker.query().where('LockerID', checkLocker[0].LockerID).patch({ Active: 0, StartTime: null, TelNo: null, Type: null, JobCode: null });
       if (numberOfEditedRows > 0) {
@@ -177,39 +118,45 @@ exports.CustomService = class CustomService {
   }
 
   //case 4 Only Application
-  async execSetPickUp(lockerNo, jobCode) {
+  async execSetPickUp(data) {
+    let lockerID = data.LockerID;
+    let jobCode = data.JobCode;
     const locker = require('../../models/locker.model')();
 
-    let lockerAvailable = await locker.query().where('Active', 0).where('lockerNo', lockerNo);
+    let lockerAvailable = await locker.query().where('Active', 0).where('lockerNo', lockerID);
     console.log("Locker Available : " + lockerAvailable.length)
     if (lockerAvailable.length > 0) {
       console.log("Locker Available No : " + lockerAvailable[0].LockerID);
       let dateNow = new Date();
-      const numberOfEditedRows = await locker.query().where('LockerID', lockerNo).patch({ Active: 1, StartTime: dateNow, TelNo: "", Type: "pickup", JobCode: jobCode });
+      const numberOfEditedRows = await locker.query().where('LockerID', lockerID).patch({ Active: 1, StartTime: dateNow, TelNo: "", Type: "pickup", JobCode: jobCode });
     }
 
-    return [{ "LockerNo": lockerNo }];
+    return [{ "LockerID": lockerID }];
   }
 
   //case 5
-  async execCheckCodePickUp(code) {
-    let lockerNo = 0;
+  async execCheckCodePickUp(data) {
+    let lockerID = 0;
+    let otp = data.OTP;
+    console.log("OTP : " + otp);
     const locker = require('../../models/locker.model')();
-
-    let checkCode = await locker.query().where('OTP', code).where('Active', 1).where('Type', "pickup");
-    if (checkCode.length > 0) {
-      lockerNo = checkCode[0].LockerID;
+    let checkOTP = await locker.query().where('OTP', otp).where('Active', 1).where('Type', "pickup");
+    console.log("checkOTP : " + checkOTP.length);
+    if (checkOTP.length > 0) {
+      console.log("LockerID : " + JSON.stringify(checkOTP[0].LockerID));
+      lockerID = checkOTP[0].LockerID;
     }
-
-    return [{ "LockerNo": lockerNo }];
+    
+    return [{ "LockerID" : lockerID }];
   }
 
   //case 6
-  async execClearPickUp(lockerNo) {
+  async execClearPickUp(data) {
+    let lockerID = data.LockerID;
     let status = false;
     const locker = require('../../models/locker.model')();
 
-    let clearLocker = await locker.query().where('LockerID', lockerNo).where('Active', 1).where('Type', "pickup");
+    let clearLocker = await locker.query().where('LockerID', lockerID).where('Active', 1).where('Type', "pickup");
     if (clearLocker.length > 0) {
       const numberOfEditedRows = await locker.query().where('LockerID', clearLocker[0].LockerID).patch({ Active: 0, StartTime: null, TelNo: null, Type: null, OTP: null, JobCode: null });
       if (numberOfEditedRows > 0) {
