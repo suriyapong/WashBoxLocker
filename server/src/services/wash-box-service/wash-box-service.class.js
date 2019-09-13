@@ -26,8 +26,9 @@ exports.WashBoxService = class WashBoxService {
 
     //case 4 Only Application
     if (id == "SetPickUp") {
+      console.log("case 4 SetPickUp");
       let result = await this.execSetPickUp(data);
-      console.log("LockerID : " + result[0].LockerID);
+      console.log("Status : " + result[0].Status);
       return result;
     }
 
@@ -119,19 +120,29 @@ exports.WashBoxService = class WashBoxService {
 
   //case 4 Only Application
   async execSetPickUp(data) {
+
+    let status = false;
     let lockerID = data.LockerID;
     let jobCode = data.JobCode;
     const locker = require('../../models/locker.model')();
+    const job = require('../../models/job.model')();
 
-    let lockerAvailable = await locker.query().where('Active', 0).where('lockerNo', lockerID);
+    //check locker เบอร์นี้ว่างไหม
+    let lockerAvailable = await locker.query().where('Active', 0).where('LockerID', lockerID);
     console.log("Locker Available : " + lockerAvailable.length)
     if (lockerAvailable.length > 0) {
       console.log("Locker Available No : " + lockerAvailable[0].LockerID);
-      let dateNow = new Date();
-      const numberOfEditedRows = await locker.query().where('LockerID', lockerID).patch({ Active: 1, StartTime: dateNow, TelNo: "", Type: "pickup", JobCode: jobCode });
+      //Check JobCode ตรงกับในระบบ
+      let jobPass = await job.query().where('JobCode', jobCode);
+      if (jobPass.length == 1) {
+        let dateNow = new Date();
+        let otp = Math.floor(1000 + Math.random() * 9000);
+        const numberOfEditedRows = await locker.query().where('LockerID', lockerID).patch({ Active: 1, StartTime: dateNow, TelNo: "", Type: "pickup", OTP: otp, JobCode: jobCode });
+        status = true;
+      }
     }
 
-    return [{ "LockerID": lockerID }];
+    return [{ "Status": status }];
   }
 
   //case 5
@@ -146,8 +157,8 @@ exports.WashBoxService = class WashBoxService {
       console.log("LockerID : " + JSON.stringify(checkOTP[0].LockerID));
       lockerID = checkOTP[0].LockerID;
     }
-    
-    return [{ "LockerID" : lockerID }];
+
+    return [{ "LockerID": lockerID }];
   }
 
   //case 6
