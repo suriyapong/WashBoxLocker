@@ -71,7 +71,7 @@
 
 <style scoped>
 .bgimg-dropoff-4 {
-  background: url("/assets/DropOff/05-Drop-Off.png") no-repeat center center
+  background: url("~assets/DropOff/05-Drop-Off.png") no-repeat center center
     fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;

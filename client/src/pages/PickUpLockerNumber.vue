@@ -1,7 +1,7 @@
 <template>
   <q-page class="bgimg-pickup-2">
     <div class="flex flex-center">
-      <div class="q-pa-md body">
+      <div class="q-pa-md">
         <div class="row">
           <table>
             <tbody>
@@ -29,7 +29,7 @@
 
 <style scoped>
 .bgimg-pickup-2 {
-  background: url("/assets/PickUp/03-Pick-Up.png") no-repeat center center fixed;
+  background: url("~assets/PickUp/03-Pick-Up.png") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

@@ -28,7 +28,7 @@
 }
 
 .bgimg-dropoff-5 {
-  background: url("/assets/DropOff/07-Drop-Off.png") no-repeat center center
+  background: url("~assets/DropOff/07-Drop-Off.png") no-repeat center center
     fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
