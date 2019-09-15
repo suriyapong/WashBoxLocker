@@ -1,43 +1,60 @@
 <template>
   <q-page class="bgimg-pickup-1">
-    <div class="flex flex-center">
+    <div class="flex flex-center" style="padding-top:20px;">
       <div class="q-pa-md">
-        <div class="row" style="padding-top:150px;">
-          <table align="center">
-            <tbody>
-              <tr>
-                <td align="center" colspan="5" height="180px">
-                  <b>{{ formModel.OTP }}</b>
-                </td>
-              </tr>
-              <tr>
-                <td @click="codeNo(1)" align="center">1</td>
-                <td @click="codeNo(2)" align="center">2</td>
-                <td @click="codeNo(3)" align="center">3</td>
-              </tr>
-              <tr>
-                <td @click="codeNo(4)" align="center">4</td>
-                <td @click="codeNo(5)" align="center">5</td>
-                <td @click="codeNo(6)" align="center">6</td>
-              </tr>
-              <tr>
-                <td @click="codeNo(7)" align="center">7</td>
-                <td @click="codeNo(8)" align="center">8</td>
-                <td @click="codeNo(9)" align="center">9</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td @click="codeNo(0)" align="center">0</td>
-                <td></td>
-              </tr>
-              <tr></tr>
-              <tr>
-                <td align="center" colspan="5">
-                  <img @click="ok()" alt="Quasar logo" src="~assets/DropOff/05-Drop-Off-btn1.png" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="row" style="width:1210px; padding-top:175px">
+          <div class="col-5" style="padding-top:55px; padding-left:85px;">
+            <table>
+              <tbody>
+                <tr>
+                  <td class="btn-number" @click="codeNo(1)" align="center">
+                    <img src="assets/PickUp/02-Pick-Up-btn-number1.png" />
+                  </td>
+                  <td class="btn-number" @click="codeNo(2)" align="center">
+                    <img src="assets/PickUp/02-Pick-Up-btn-number2.png" />
+                  </td>
+                  <td class="btn-number" @click="codeNo(3)" align="center">
+                    <img src="assets/PickUp/02-Pick-Up-btn-number3.png" />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="btn-number" @click="codeNo(4)" align="center">
+                    <img src="assets/PickUp/02-Pick-Up-btn-number4.png" />
+                  </td>
+                  <td class="btn-number" @click="codeNo(5)" align="center">
+                    <img src="assets/PickUp/02-Pick-Up-btn-number5.png" />
+                  </td>
+                  <td class="btn-number" @click="codeNo(6)" align="center">
+                    <img src="assets/PickUp/02-Pick-Up-btn-number6.png" />
+                  </td>
+                </tr>
+                <tr>
+                  <td class="btn-number" @click="codeNo(7)" align="center">
+                    <img src="assets/PickUp/02-Pick-Up-btn-number7.png" />
+                  </td>
+                  <td class="btn-number" @click="codeNo(8)" align="center">
+                    <img src="assets/PickUp/02-Pick-Up-btn-number8.png" />
+                  </td>
+                  <td class="btn-number" @click="codeNo(9)" align="center">
+                    <img src="assets/PickUp/02-Pick-Up-btn-number9.png" />
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td class="btn-number" @click="telephoneNo(0)" align="center">
+                    <img src="assets/PickUp/02-Pick-Up-btn-number0.png" />
+                  </td>
+                  <td class="btn-number" @click="deleteTelephoneNo()" align="center">
+                    <img src="assets/PickUp/02-Pick-Up-btn-numberX.png" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-7 text-h2" align="center" style="padding-top:170px;">{{ formModel.OTP}}</div>
+          <p style="padding-top:100px;">
+            <img @click="ok()" src="~assets/PickUp/02-Pick-Up-btn1.png" />
+          </p>
         </div>
       </div>
     </div>
