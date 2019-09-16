@@ -65,6 +65,8 @@ export default {
             console.log(result[0].Status);
             if(result[0].Status){
               this.$router.push({ path: `/dropoffconfirm` });
+            }else{
+               this.$router.push({ path: `/lockernotavailable` });
             }
           });
       } else {

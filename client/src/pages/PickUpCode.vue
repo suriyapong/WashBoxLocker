@@ -41,12 +41,10 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td class="btn-number" @click="telephoneNo(0)" align="center">
+                  <td class="btn-number" @click="codeNo(0)" align="center">
                     <img src="assets/PickUp/02-Pick-Up-btn-number0.png" />
                   </td>
-                  <td class="btn-number" @click="deleteTelephoneNo()" align="center">
-                    <img src="assets/PickUp/02-Pick-Up-btn-numberX.png" />
-                  </td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
