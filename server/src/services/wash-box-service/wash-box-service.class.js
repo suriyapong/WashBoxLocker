@@ -88,7 +88,7 @@ exports.WashBoxService = class WashBoxService {
         const numberOfEditedRows = await locker.query().where('LockerID', lockerNoSelect).patch({ Active: 1, StartTime: dateNow, TelNo: tel, Type: "dropoff", JobCode: jobCode });
         if (numberOfEditedRows > 0) {
           lockerNo = lockerNoSelect;
-          let success = this.addLog("ลูกค้าฝากผ้าซัก", tel, lockerNo, jobCode);
+          let success = this.execAddLog("ลูกค้าฝากผ้าซัก", tel, lockerNo, jobCode);
           if (success) {
             console.log("Add log complete");
           }
@@ -112,6 +112,10 @@ exports.WashBoxService = class WashBoxService {
       const numberOfEditedRows = await locker.query().where('LockerID', checkLocker[0].LockerID).patch({ Active: 0, StartTime: null, TelNo: null, Type: null, JobCode: null });
       if (numberOfEditedRows > 0) {
         status = true;
+        let success = this.execAddLog("พนักงานมาเปิดเอาผ้าไปซัก", checkLocker[0].TelNo, checkLocker[0].LockerID, checkLocker[0].JobCode);
+        if (success) {
+          console.log("Add log complete");
+        }
       }
     }
 
@@ -120,10 +124,10 @@ exports.WashBoxService = class WashBoxService {
 
   //case 4 Only Application
   async execSetPickUp(data) {
-
     let status = false;
     let lockerID = data.LockerID;
     let jobCode = data.JobCode;
+    let otp = Math.floor(1000 + Math.random() * 9000);
     const locker = require('../../models/locker.model')();
     const job = require('../../models/job.model')();
 
@@ -132,17 +136,16 @@ exports.WashBoxService = class WashBoxService {
     console.log("Locker Available : " + lockerAvailable.length)
     if (lockerAvailable.length > 0) {
       console.log("Locker Available No : " + lockerAvailable[0].LockerID);
-      //Check JobCode ตรงกับในระบบ
-      let jobPass = await job.query().where('JobCode', jobCode);
-      if (jobPass.length == 1) {
+      //Check JobCode เช็คใน job ว่ามีเลขนี้ในระบบไหม ถ้ามีก็ทำต่อ (เลขจะถูกสร้างตอนฝากผ้า)
+      let jobPass = true;
+      if (jobPass) {
         let dateNow = new Date();
-        let otp = Math.floor(1000 + Math.random() * 9000);
         const numberOfEditedRows = await locker.query().where('LockerID', lockerID).patch({ Active: 1, StartTime: dateNow, TelNo: "", Type: "pickup", OTP: otp, JobCode: jobCode });
         status = true;
       }
     }
 
-    return [{ "Status": status }];
+    return [{ "Status": status, "JobCode" : jobCode, "OTP" : otp }];
   }
 
   //case 5
@@ -178,12 +181,14 @@ exports.WashBoxService = class WashBoxService {
     return [{ "Status": status }];
   }
 
-  async addLog(message, telNo, lockerNo, jobCode) {
+  async execAddLog(message, telNo, lockerNo, jobCode) {
     let status = false;
     const log = require('../../models/log.model')();
     try {
+      console.log("Add Log true");
       await log.query().insert({ Message: message, TelNo: telNo, LockerID: lockerNo, JobCode: jobCode, CreateDate: new Date() });
       status = true;
+      console.log("Add Log true");
     } catch (error) {
       status = false;
     }

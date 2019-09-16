@@ -22,21 +22,5 @@ class log extends Model {
 }
 
 module.exports = function (app) {
-  const db = app.get('knex');
-
-  db.schema.hasTable('log').then(exists => {
-    if (!exists) {
-      db.schema.createTable('log', table => {
-        table.increments('id');
-        table.string('text');
-        table.timestamp('createdAt');
-        table.timestamp('updatedAt');
-      })
-        .then(() => console.log('Created log table')) // eslint-disable-line no-console
-        .catch(e => console.error('Error creating log table', e)); // eslint-disable-line no-console
-    }
-  })
-    .catch(e => console.error('Error creating log table', e)); // eslint-disable-line no-console
-
   return log;
 };
