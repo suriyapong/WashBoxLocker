@@ -51,10 +51,16 @@
               </tbody>
             </table>
           </div>
-          <div class="col-7 text-h2" align="center" style="padding-top:170px;">{{ formModel.OTP}}</div>
-          <p style="padding-top:100px;">
-            <img @click="ok()" src="~assets/PickUp/02-Pick-Up-btn1.png" />
-          </p>
+          <div class="col-7" align="center" style="padding-top:170px;">
+            <q-input
+              class="text-h2"
+              style="padding-left:150px; text-align:center;"
+              v-model="formModel.OTP"
+            />
+            <p style="padding-top:100px;">
+              <img @click="ok()" src="~assets/PickUp/02-Pick-Up-btn-1.png" />
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -62,6 +68,9 @@
 </template>
 
 <style scoped>
+textarea:focus, input:focus{
+    outline: none;
+}
 .bgimg-pickup-1 {
   background: url("~assets/PickUp/02-Pick-Up.png") no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -101,22 +110,6 @@ export default {
     async ok() {
       if (this.formModel.OTP.length >= 4) {
         //check OTP
-        // const q = {};
-        // q.cmd = "CheckCodePickUp";
-        // q.Code = this.formModel.OTP;
-        // this.$store
-        //   .dispatch("custom-service/find", { query: q })
-        //   .then(result => {
-        //     var res = [];
-        //     if (result[0].LockerNo != 0) {
-        //       this.$router.push({
-        //         path: `/pickuplockernumber/${result[0].LockerNo}`
-        //       });
-        //     } else {
-        //       this.$router.push({ path: `/` });
-        //     }
-        //   });
-
         feathersClient
           .service("wash-box-service")
           .patch("CheckCodePickUp", { OTP: this.formModel.OTP })

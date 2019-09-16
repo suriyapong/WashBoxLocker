@@ -33,7 +33,7 @@ export default {
     //--start config
     lockerID: "",
     lockerDetail: {},
-    jobCode: "",
+    jobCode: ""
     //--end config
   }),
   async mounted() {
@@ -67,15 +67,18 @@ export default {
       if (this.jobCode != "") {
         feathersClient
           .service("wash-box-service")
-          .patch("SetPickUp", { LockerID: this.lockerID, JobCode : this.jobCode })
+          .patch("SetPickUp", {
+            LockerID: this.lockerID,
+            JobCode: this.jobCode
+          })
           .then(result => {
             console.log(result[0].Status);
             if (result[0].Status) {
               this.$router.push({
-                path: `/staff/clearpickupcomplete/${this.lockerID,this.jobCode}`
+                path: `/staff/setpickupcomplete/${this.lockerID}`
               });
             } else {
-              this.$router.push({ path: `/` });
+              this.$router.push({ path: `/staff` });
             }
           });
       }

@@ -12,9 +12,9 @@
         >
           ล็อคเกอร์ได้ถูกเปิดเพื่อคืนผ้า
           <br />
-          รหัสงาน {{ JobCode }}
+          รหัสงาน {{ locker.JobCode }}
           <br />
-          รหัสรับผ้า {{ OTP }}
+          รหัสรับผ้า {{ locker.OTP }}
         </div>
       </q-card-section>
     </q-card>
@@ -31,21 +31,30 @@ export default {
   data: () => ({
     //--start config
     lockerID: "",
-    lockerDetail: {}
+    locker:{},
     //--end config
   }),
-  async mounted() {
-    this.lockerID = this.LockerID;
-    this.startInterval();
-  },
-  props: ["LockerID", "JobCode", "OTP"],
+  props: ["LockerID"],
   components: {
     ListCompLocker
+  },
+  async mounted() {
+    this.lockerID = this.LockerID;
+    this.renderUI();
+    this.startInterval();
   },
   filters: {
     date: createDateFilter("DD/MM/YYYY HH:mm", { locale })
   },
   methods: {
+    async renderUI() {
+      const q = {};
+      q.LockerID = this.lockerID;
+      let result = await this.$store.dispatch("locker/find", {
+        query: q
+      });
+      this.locker = result.data[0];
+    },
     startInterval: function() {
       var handle = setInterval(() => {
         this.$router.push({ path: `/staff/locker` });

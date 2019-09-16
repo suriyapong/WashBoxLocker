@@ -25,7 +25,7 @@
                 <q-item-section>
                   <q-item-label lines="1">
                     {{ convertTypeToString(l.Type) }}
-                    <span v-if="l.TelNo != null">[{{ l.TelNo }}]</span>
+                    <span v-if="l.Active == 1">[{{ l.TelNo }}]</span>
                   </q-item-label>
                   <q-item-label caption>{{ l.StartTime | date }}</q-item-label>
                 </q-item-section>
@@ -115,7 +115,7 @@ export default {
         this.$router.push({ path: `/staff/clearlockerdropoff/${lockerID}` });
       }
 
-      if (type == null) {
+      if (type == null || type == "") {
         this.$router.push({ path: `/staff/setpickup/${lockerID}` });
       }
     }
