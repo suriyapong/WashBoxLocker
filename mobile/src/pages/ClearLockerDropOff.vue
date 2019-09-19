@@ -3,18 +3,18 @@
     <q-card class="my-card">
       <q-card-section>
         <div class="row q-col-gutter-sm">
-          <div class="col-12 col-md-4" align="center" style="font-size:150px;">{{ lockerID }}</div>
+          <div class="col-12 col-md-12" align="center" style="font-size:150px;">{{ lockerID }}</div>
           <div
-            class="col-12 col-md-4"
+            class="col-12 col-md-12"
             align="center"
             style="font-size:25px;"
           >{{ convertTypeToString(lockerDetail.Type) }} {{ lockerDetail.StartTime | date }}</div>
-          <div class="col-12 col-md-4" align="center" style="font-size:25px;">
+          <div class="col-12 col-md-12" align="center" style="font-size:25px;">
             <q-icon name="call"></q-icon>
             {{ lockerDetail.TelNo }}
           </div>
         </div>
-        <div class="col-12 col-md-4" align="center" style="padding-top:30px;">
+        <div class="col-12 col-md-12" align="center" style="padding-top:30px;">
           <q-btn
             icon="lock"
             flat
@@ -85,7 +85,7 @@ export default {
           if (result[0].Status) {
             this.$router.push({ path: `/staff/clearlockerdropoffcomplete/${this.lockerID}` });
           } else {
-            this.$router.push({ path: `/` });
+            this.$router.push({ path: `/locker` });
           }
         });
     }

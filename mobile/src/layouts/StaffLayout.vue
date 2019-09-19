@@ -68,7 +68,7 @@ export default {
         {
           lable: "Locker",
           icon: "description",
-          to: "/staff/locker"
+          to: "/locker"
         }
       ]
     };

@@ -44,30 +44,58 @@
                   <td class="btn-number" @click="codeNo(0)" align="center">
                     <img src="assets/PickUp/02-Pick-Up-btn-number0.png" />
                   </td>
-                  <td></td>
+                  <td class="btn-number" @click="deleteCode()" align="center">
+                    <img src="assets/DropOff/05-Drop-Off-btn-numberX.png" />
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div class="col-7" align="center" style="padding-top:170px;">
+          <div class="col-7" align="center" style="padding-top:110px;">
             <q-input
               class="text-h2"
-              style="padding-left:150px; text-align:center;"
+              style="padding-left:150px; visibility: hidden;"
               v-model="formModel.OTP"
             />
+            <div class="text-h2" style="padding-left:20px; height:100px;">{{ formModel.OTP }}</div>
             <p style="padding-top:100px;">
               <img @click="ok()" src="~assets/PickUp/02-Pick-Up-btn-1.png" />
             </p>
           </div>
         </div>
       </div>
+
+      <q-dialog v-model="alert" align="center">
+        <q-card style="max-width:500px; padding:30px;">
+          <q-card-section>
+            <!-- <div class="text-h6">แจ้งเตือน</div> -->
+          </q-card-section>
+          <q-card-section class="text-h5">
+            กรอกรหัสรับผ้าผิด
+            <br />กรุณาทำรายการใหม่อีกครั้ง
+          </q-card-section>
+          <q-card-actions>
+            <div>
+              <q-btn
+                class="text-h4"
+                flat
+                label="OK"
+                color="primary"
+                v-close-popup
+                @click="closeAlert()"
+              />
+            </div>
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
     </div>
   </q-page>
 </template>
 
 <style scoped>
-textarea:focus, input:focus{
-    outline: none;
+textarea:focus,
+input:focus {
+  outline: none;
 }
 .bgimg-pickup-1 {
   background: url("~assets/PickUp/02-Pick-Up.png") no-repeat center center fixed;
@@ -95,7 +123,8 @@ export default {
       Active: 1,
       TelNo: "",
       OTP: ""
-    }
+    },
+    alert: false
     //--end config
   }),
   async mounted() {},
@@ -103,6 +132,14 @@ export default {
     codeNo(no) {
       if (this.formModel.OTP.length < 4) {
         this.formModel.OTP = this.formModel.OTP + no;
+      }
+    },
+    deleteCode() {
+      if (this.formModel.OTP.length <= 4) {
+        this.formModel.OTP = this.formModel.OTP.substring(
+          0,
+          this.formModel.OTP.length - 1
+        );
       }
     },
     async ok() {
@@ -117,11 +154,14 @@ export default {
               this.$router.push({
                 path: `/pickuplockernumber/${result[0].LockerID}`
               });
-            } else {
-              this.$router.push({ path: `/` });
+            } else if (result[0].LockerID == 0) {
+              this.alert = true;
             }
           });
       }
+    },
+    closeAlert() {
+      this.$router.push({ path: `/` });
     }
   }
 };

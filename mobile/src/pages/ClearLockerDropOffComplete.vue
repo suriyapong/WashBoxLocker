@@ -40,7 +40,7 @@ export default {
   methods: {
     startInterval: function() {
       var handle = setInterval(() => {
-        this.$router.push({ path: `/staff/locker` });
+        this.$router.push({ path: `/locker` });
 
         // When you want to cancel it:
         clearInterval(handle);

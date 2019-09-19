@@ -51,6 +51,7 @@ module.exports = function (ctx) {
         'QDate',
         'QPopupProxy',
         'QCard',
+        'QDialog',
       ],
 
       directives: [

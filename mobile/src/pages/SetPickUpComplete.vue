@@ -57,12 +57,12 @@ export default {
     },
     startInterval: function() {
       var handle = setInterval(() => {
-        this.$router.push({ path: `/staff/locker` });
+        this.$router.push({ path: `/locker` });
 
         // When you want to cancel it:
         clearInterval(handle);
         handle = 0; // I just do this so I know I've cleared the interval
-      }, 10 * 1000);
+      }, 5 * 1000);
     }
   }
 };

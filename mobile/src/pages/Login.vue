@@ -64,17 +64,20 @@ export default {
   methods: {
     async onLoginClick() {
       this.loading = true;
-      try {
-        var res = await this.$store.dispatch("auth/authenticate", {
-          strategy: "local",
-          UserName: this.username,
-          Password: this.password
-        });
-        this.$router.push("/home");
-      } catch (error) {
-        alert('login ไม่สำเร็จ ['  + error.message +']');
-      } finally {
-        this.loading = false;
+      // try {
+      //   var res = await this.$store.dispatch("auth/authenticate", {
+      //     strategy: "local",
+      //     UserName: this.username,
+      //     Password: this.password
+      //   });
+      //   this.$router.push("/home");
+      // } catch (error) {
+      //   alert('login ไม่สำเร็จ ['  + error.message +']');
+      // } finally {
+      //   this.loading = false;
+      // }
+      if(this.username == "admin" && this.password == "admin1234"){
+        this.$router.push("/locker");
       }
     }
   },

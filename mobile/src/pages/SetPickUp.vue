@@ -75,10 +75,10 @@ export default {
             console.log(result[0].Status);
             if (result[0].Status) {
               this.$router.push({
-                path: `/staff/setpickupcomplete/${this.lockerID}`
+                path: `/setpickupcomplete/${this.lockerID}`
               });
             } else {
-              this.$router.push({ path: `/staff` });
+              this.$router.push({ path: `/locker` });
             }
           });
       }

@@ -112,11 +112,11 @@ export default {
       console.log("OPEN LOCKER ID" + lockerID + " TYPE : " + type);
 
       if (type == "dropoff") {
-        this.$router.push({ path: `/staff/clearlockerdropoff/${lockerID}` });
+        this.$router.push({ path: `/clearlockerdropoff/${lockerID}` });
       }
 
       if (type == null || type == "") {
-        this.$router.push({ path: `/staff/setpickup/${lockerID}` });
+        this.$router.push({ path: `/setpickup/${lockerID}` });
       }
     }
   }

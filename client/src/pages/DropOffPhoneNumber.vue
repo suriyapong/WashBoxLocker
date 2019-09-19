@@ -51,20 +51,38 @@
               </tbody>
             </table>
           </div>
-          <div class="col-7" align="center" style="padding-top:170px;">
+          <div class="col-7" align="center" style="padding-top:110px;">
             <!-- <b class="text-h2" style="color:red">{{ formModel.TelNo }}</b> -->
             <q-input
+              aria-describedat
               class="text-h2"
-              style="padding-left:150px;"
+              style="padding-left:150px; visibility: hidden;"
               v-model="formModel.TelNo"
               mask="### ### ####"
             />
+            <div class="text-h2" style="padding-left:20px; height:100px;">{{ formModel.TelNo }}</div>
             <p style="padding-top:100px;">
               <img @click="ok()" src="~assets/DropOff/05-Drop-Off-btn1.png" />
             </p>
           </div>
         </div>
       </div>
+
+      <q-dialog v-model="alert" align="center">
+        <q-card style="max-width:500px; padding:30px;">
+          <q-card-section>
+            <!-- <div class="text-h6">แจ้งเตือน</div> -->
+          </q-card-section>
+
+          <q-card-section class="text-h5">เบอร์โทรนี้ได้ทำรายการไปแล้ว<br/>กรุณาใช้เบอร์โทรศัพท์อื่น</q-card-section>
+
+          <q-card-actions>
+            <div>
+            <q-btn  class="text-h4" flat label="OK" color="primary" v-close-popup @click="closeAlert()"/>
+            </div>
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
     </div>
   </q-page>
 </template>
@@ -113,7 +131,8 @@ export default {
     formModel: {
       Active: 1,
       TelNo: ""
-    }
+    },
+    alert: false
     //--end config
   }),
   async mounted() {},
@@ -140,31 +159,18 @@ export default {
     async ok() {
       try {
         if (this.formModel.TelNo.length >= 10) {
-          // const q = {};
-          // q.cmd = "SetDropOff";
-          // q.Telephone = this.formModel.TelNo;
-          // await this.$store
-          //   .dispatch("custom-service/find", { query: q })
-          //   .then(result => {
-          //     if (result[0].LockerNo != 0) {
-          //       this.$router.push({
-          //         path: `/dropofflockernumber/${result[0].LockerNo}`
-          //       });
-          //     } else {
-          //       this.$router.push({ path: `/lockernotavailable` });
-          //     }
-          //   });
-
           feathersClient
             .service("wash-box-service")
             .patch("SetDropOff", { Telephone: this.formModel.TelNo })
             .then(result => {
               console.log(result[0].LockerNo);
-              if (result[0].LockerNo != 0) {
+              if (result[0].LockerNo != 0 && result[0].LockerNo != -1) {
                 this.$router.push({
                   path: `/dropofflockernumber/${result[0].LockerNo}`
                 });
-              } else {
+              } else if (result[0].LockerNo == 0) {
+                this.alert = true;
+              } else if (result[0].LockerNo == -1) {
                 this.$router.push({ path: `/lockernotavailable` });
               }
             });
@@ -173,6 +179,9 @@ export default {
         console.log(err);
       } finally {
       }
+    },
+    closeAlert() {
+      this.$router.push({ path: `/` });
     }
   }
 };

@@ -4,15 +4,14 @@ const routes = [
     path: '/',
     component: () => import('layouts/LoginLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
+      { path: '', component: () => import('pages/Login.vue') },
       { path: 'login', component: () => import('pages/Login.vue') },
     ]
   },
   {
-    path: '/staff',
+    path: '/',
     component: () => import('layouts/StaffLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Locker.vue') },
       { path: 'locker', component: () => import('pages/Locker.vue') },
       { path: 'clearlockerdropoff/:LockerID', name: 'ClearLockerDropOff', props: true, component: () => import('pages/ClearLockerDropOff.vue') },
       { path: 'clearlockerdropoffcomplete/:LockerID', name: 'ClearLockerDropOffComplete', props: true, component: () => import('pages/ClearLockerDropOffComplete.vue') },
