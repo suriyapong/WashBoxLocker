@@ -67,10 +67,17 @@ exports.WashBoxService = class WashBoxService {
   async execSetDropOff(data) {
     let lockerNo = 0;
     let telephone = data.Telephone;
+    let telephones = telephone.split(' ');
+    let tel = "";
+    telephones.forEach(t => {
+      tel += t;
+    });
+    console.log("Telephone : " + tel);
     const job = require('../../models/job.model')();
     const locker = require('../../models/locker.model')();
 
-    let checkTelephone = await locker.query().where('Active', 1).where('TelNo', telephone);
+    let checkTelephone = await locker.query().where('Active', 1).where('TelNo', tel);
+    console.log("Telephone : " + telephone)
     console.log("Check Telephone : " + checkTelephone.length)
     if (checkTelephone.length == 0) {
       let lockerAvailable = await locker.query().where('Active', 0);
@@ -79,12 +86,7 @@ exports.WashBoxService = class WashBoxService {
         console.log("Locker Available No : " + lockerAvailable[0].LockerID);
         let lockerNoSelect = lockerAvailable[0].LockerID;
         let dateNow = new Date();
-        let telephones = telephone.split(' ');
-        let tel = "";
-        telephones.forEach(t => {
-          tel += t;
-        });
-        console.log("Telephone : " + tel);
+
 
         //1. ทำการ gen job code ก่อนโดย insert ที่ตาราง tbjob แล้วเอา id มา gen jobcode ต่อ
         let result = await job.query().insert({ JobCode: "jx", TelNo: tel, LockerNo: lockerNoSelect, CreateDate: new Date() })
@@ -102,8 +104,13 @@ exports.WashBoxService = class WashBoxService {
             console.log("Locker No : " + lockerNo);
           }
         }
+      }else{
+        //lockerAvailable
+        return [{ "LockerNo": -1 }];
       }
       return [{ "LockerNo": lockerNo }];
+    }else{
+      return [{ "LockerNo": 0 }];
     }
   }
 
@@ -172,6 +179,8 @@ exports.WashBoxService = class WashBoxService {
     if (checkOTP.length > 0) {
       console.log("LockerID : " + JSON.stringify(checkOTP[0].LockerID));
       lockerID = checkOTP[0].LockerID;
+    }else{
+      return [{ "LockerID": lockerID }];
     }
 
     return [{ "LockerID": lockerID }];
@@ -188,7 +197,7 @@ exports.WashBoxService = class WashBoxService {
       const numberOfEditedRows = await locker.query().where('LockerID', clearLocker[0].LockerID).patch({ Active: 0, StartTime: null, TelNo: null, Type: null, OTP: null, JobCode: null });
       if (numberOfEditedRows > 0) {
         status = true;
-        let success = this.execAddLog("ลูกค้ามารับผ้าที่ซักไปแล้ว", "", lockerID,"");
+        let success = this.execAddLog("ลูกค้ามารับผ้าที่ซักไปแล้ว", "", lockerID, "");
         if (success) {
           console.log("Add log complete");
         }
