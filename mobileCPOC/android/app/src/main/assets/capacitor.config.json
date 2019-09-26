@@ -1,0 +1,7 @@
+{
+  "appId": "com.example.Prodigyfly",
+  "appName": "Prodigyfly",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "dist"
+}

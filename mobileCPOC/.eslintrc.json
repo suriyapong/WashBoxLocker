@@ -1,0 +1,16 @@
+{
+    
+  "plugins": [
+    "import",
+    "vue"
+  ],
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "rules": {
+    "semi": [
+      "error",
+      "never"
+    ]
+  }
+}
