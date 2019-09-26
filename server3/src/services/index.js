@@ -1,0 +1,102 @@
+const role = require('./role/role.service.js');
+const user = require('./user/user.service.js');
+
+const blob = require('./blob/blob.service.js');
+
+const company = require('./company/company.service.js');
+
+
+const terminal = require('./terminal/terminal.service.js');
+const flightstatus = require('./flightstatus/flightstatus.service.js');
+const alcoholstatus = require('./alcoholstatus/alcoholstatus.service.js');
+const aircrafts = require('./aircrafts/aircrafts.service.js');
+const airports = require('./airports/airports.service.js');
+const flight = require('./flight/flight.service.js');
+const leg = require('./leg/leg.service.js');
+const request = require('./request/request.service.js');
+const requestuser = require('./requestuser/requestuser.service.js');
+const requeststatus = require('./requeststatus/requeststatus.service.js');
+const passenger = require('./passenger/passenger.service.js');
+const alcoholtest = require('./alcoholtest/alcoholtest.service.js');
+const baggage = require('./baggage/baggage.service.js');
+const briefcheckincommand = require('./briefcheckincommand/briefcheckincommand.service.js');
+const passengercommand = require('./passengercommand/passengercommand.service.js');
+const flightselect = require('./flightselect/flightselect.service.js');
+const briefcheckintvcommand = require('./briefcheckintvcommand/briefcheckintvcommand.service.js');
+const cargo = require('./cargo/cargo.service.js');
+const booking = require('./booking/booking.service.js');
+const bookingstatus = require('./bookingstatus/bookingstatus.service.js');
+const bookingleg = require('./bookingleg/bookingleg.service.js');
+const bookingpassenger = require('./bookingpassenger/bookingpassenger.service.js');
+const bookingselect = require('./bookingselect/bookingselect.service.js');
+const vdo = require('./vdo/vdo.service.js');
+const transportlocaltion = require('./transportlocaltion/transportlocaltion.service.js');
+const bookingpassengertype = require('./bookingpassengertype/bookingpassengertype.service.js');
+const pilot = require('./pilot/pilot.service.js');
+const transportdriver = require('./transportdriver/transportdriver.service.js');
+const flightcommand = require('./flightcommand/flightcommand.service.js');
+const bookingtype = require('./bookingtype/bookingtype.service.js');
+const transport = require('./transport/transport.service.js');
+const transportjob = require('./transportjob/transportjob.service.js');
+const transportselect = require('./transportselect/transportselect.service.js');
+const transportcommand = require('./transportcommand/transportcommand.service.js');
+const nogocommand = require('./nogocommand/nogocommand.service.js');
+const emailcommand = require('./emailcommand/emailcommand.service.js');
+const userofcompany = require('./userofcompany/userofcompany.service.js');
+const owner = require('./owner/owner.service.js');
+const delayreportcommand = require('./delayreportcommand/delayreportcommand.service.js');
+const passengerhistorycommand = require('./passengerhistorycommand/passengerhistorycommand.service.js');
+const monthlyhistorycommand = require('./monthlyhistorycommand/monthlyhistorycommand.service.js');
+const historyservice = require('./historyservice/historyservice.service.js');
+// eslint-disable-next-line no-unused-vars
+module.exports = function (app) {
+  app.configure(role);
+  app.configure(user);
+
+  app.configure(blob);
+
+  app.configure(company);
+
+  app.configure(terminal);
+  app.configure(flightstatus);
+  app.configure(alcoholstatus);
+  app.configure(aircrafts);
+  app.configure(airports);
+  app.configure(flight);
+  app.configure(leg);
+  app.configure(request);
+  app.configure(requestuser);
+  app.configure(requeststatus);
+  app.configure(passenger);
+  app.configure(alcoholtest);
+  app.configure(baggage);
+  app.configure(briefcheckincommand);
+  app.configure(passengercommand);
+  app.configure(flightselect);
+  app.configure(briefcheckintvcommand);
+  app.configure(cargo);
+  app.configure(vdo);
+  app.configure(booking);
+  app.configure(bookingstatus);
+  app.configure(bookingleg);
+  app.configure(bookingpassenger);
+  app.configure(bookingselect);
+  app.configure(transportlocaltion);
+  app.configure(bookingpassengertype);
+  app.configure(pilot);
+  app.configure(transportdriver);
+  app.configure(flightcommand);
+  app.configure(bookingtype);
+  app.configure(transport);
+  app.configure(transportjob);
+  app.configure(transportselect);
+  app.configure(transportcommand);
+  app.configure(nogocommand);
+  app.configure(emailcommand);
+  app.configure(userofcompany);
+  app.configure(owner);
+  app.configure(delayreportcommand);
+  app.configure(passengerhistorycommand);
+  app.configure(monthlyhistorycommand);
+  app.configure(historyservice);
+};

@@ -1,0 +1,38 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "baseUploadUrl": "http://localhost:3030/uploads/",
+  "public": "../public/",
+  "paginate": {
+    "default": 2000,
+    "max": 3000
+  },
+  "mssql": {
+    "client": "mssql",
+    "connection": "mssql://CPOC_DEV:Sinetong9977@27.254.174.191/CPOC_DEV"
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "Elh3n6vcEqx40VPf2/bgLQamke8=",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "uploadStoragePath": "public/uploads",
+  "uploadResources": "http://localhost:3030/uploads/"
+}
