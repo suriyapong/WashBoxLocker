@@ -2,7 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import routes from './routes'
-import store from '../store';
+import Meta from 'vue-meta'
+import feathersClient from "../plugins/feathers-client";
+
 Vue.use(VueRouter)
 
 /*
@@ -30,28 +32,29 @@ export default function (/* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE
   })
 
-  // Router.beforeEach(async (to, from, next) => {
-  //   // หน้าที่ไม่ต้อง login ให้ค่าใน array  public page 
-  //   const publicPages = ['/login'];
-  //   const authRequired = !publicPages.includes(to.path);
+  Router.beforeEach(async (to, from, next) => {
+    // หน้าที่ไม่ต้อง login ให้ค่าใน array  public page 
+    // const publicPages = ['/login'];
+    // const authRequired = !publicPages.includes(to.path);
   
-  //   if (authRequired) {
-  //     try {
-  //       await store.dispatch('auth/authenticate');
+    // if (authRequired) {
+    //   try {
+    //     await feathersClient.get('authentication');
   
-  //     } catch (error) {
-  //       return next('/login');
-  //     }
-  //   }
+    //   } catch (error) {
+    //     return next('/login');
+    //   }
+    // }
   
-  //   const user = store.state.auth.user;
+    // const user  = await feathersClient.get('authentication');
   
-  //   if (authRequired && !user) {
-  //     return next('/login');
-  //   }
+    // if (authRequired && !user) {
+    //   return next('/login');
+    // }
   
-  //   return next();
-  // }) 
+    return next();
+  })
+  Vue.use(Meta)
 
   return Router
 }

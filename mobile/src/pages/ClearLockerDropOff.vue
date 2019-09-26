@@ -83,7 +83,7 @@ export default {
         .then(result => {
           console.log(result[0].Status);
           if (result[0].Status) {
-            this.$router.push({ path: `/staff/clearlockerdropoffcomplete/${this.lockerID}` });
+            this.$router.push({ path: `/clearlockerdropoffcomplete/${this.lockerID}` });
           } else {
             this.$router.push({ path: `/locker` });
           }
