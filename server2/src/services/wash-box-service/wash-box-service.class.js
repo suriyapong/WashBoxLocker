@@ -46,6 +46,14 @@ exports.WashBoxService = class WashBoxService {
 
       return result;
     }
+
+        //case 6
+        if (id == "OpenLocker") {
+          let result = await this.execOpenLocker(data);
+          console.log("Status : " + result[0].Status);
+    
+          return result;
+        }
   }
 
   //case 1
@@ -205,6 +213,14 @@ exports.WashBoxService = class WashBoxService {
     }
 
     return [{ "Status": status }];
+  }
+
+  //case 6
+  async execOpenLocker(data) {
+    let lockerID = data.LockerID;
+
+    console.log("open locker no : " + lockerID);
+    return [{ "lockerID": lockerID }];
   }
 
   async execAddLog(message, telNo, lockerNo, jobCode) {
