@@ -10,7 +10,7 @@
           align="center"
           style="padding-top:30px; color:green; font-size:20px;"
         >
-          ล็อคเกอร์ได้ถูกเปิดเพื่อคืนผ้า
+          ล็อคเกอร์ได้ถูกเปิดเพื่อคืนผ้าแล้ว
           <br />
           รหัสงาน {{ locker.JobCode }}
           <br />

@@ -74,9 +74,16 @@ export default {
           .then(result => {
             console.log(result[0].Status);
             if (result[0].Status) {
-              this.$router.push({
-                path: `/setpickupcomplete/${this.lockerID}`
-              });
+              feathersClient
+                .service("wash-box-service")
+                .patch("OpenLocker", { LockerID: this.lockerID })
+                .then(no => {
+                  if (no != 0) {
+                    this.$router.push({
+                      path: `/setpickupcomplete/${this.lockerID}`
+                    });
+                  }
+                });
             } else {
               this.$router.push({ path: `/locker` });
             }

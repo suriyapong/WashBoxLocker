@@ -70,11 +70,20 @@ export default {
 
       feathersClient
         .service("wash-box-service")
-        .patch("ClearPickUp", { LockerID : this.lockerNo})
+        .patch("ClearPickUp", { LockerID: this.lockerNo })
         .then(result => {
           console.log(result[0].Status);
           if (result[0].Status) {
-            this.$router.push({ path: `/pickupcomplete/${this.lockerNo}` });
+            feathersClient
+              .service("wash-box-service")
+              .patch("OpenLocker", { LockerID: this.lockerNo })
+              .then(no => {
+                if (no != 0) {
+                  this.$router.push({
+                    path: `/pickupcomplete/${this.lockerNo}`
+                  });
+                }
+              });
           } else {
             this.$router.push({ path: `/` });
           }
