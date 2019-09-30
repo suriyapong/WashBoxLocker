@@ -69,6 +69,11 @@ export default {
           lable: "Locker",
           icon: "description",
           to: "/locker"
+        },
+                {
+          lable: "Open locker",
+          icon: "description",
+          to: "/openlocker"
         }
       ]
     };

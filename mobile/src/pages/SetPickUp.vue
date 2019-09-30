@@ -3,12 +3,12 @@
     <q-card class="my-card">
       <q-card-section>
         <div class="row q-col-gutter-sm">
-          <div class="col-12 col-md-4" align="center" style="font-size:150px;">{{ lockerID }}</div>
-          <div class="col-12 col-md-4" align="center" style="font-size:150px;">
+          <div class="col-12 col-md-12" align="center" style="font-size:150px;">{{ lockerID }}</div>
+          <div class="col-12 col-md-12" align="center" style="font-size:150px;">
             <q-input class="text-h3" v-model="jobCode" style="width:80%" />
           </div>
         </div>
-        <div class="col-12 col-md-4" align="center" style="padding-top:30px;">
+        <div class="col-12 col-md-12" align="center" style="padding-top:30px;">
           <q-btn
             icon="lock"
             flat

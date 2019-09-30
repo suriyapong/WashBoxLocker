@@ -18,9 +18,9 @@ const routes = [
     
       { path: 'setpickup/:LockerID', name: 'SetPickUp', props: true, component: () => import('pages/SetPickUp.vue') },
       { path: 'setpickupcomplete/:LockerID', name: 'SetPickUpComplete', props: true, component: () => import('pages/SetPickUpComplete.vue') },
-      
       { path: 'clearpickupcomplete/:LockerID', name: 'ClearPickUpComplete', props: true, component: () => import('pages/ClearPickUpComplete.vue') },
-      
+
+      { path: 'openlocker', name: 'ClearPickUpComplete', component: () => import('pages/OpenLocker.vue') },
     ]
   }
 ]
