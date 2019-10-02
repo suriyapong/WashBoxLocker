@@ -25,8 +25,8 @@
                 <q-item-section>
                   <q-item-label lines="1">
                     {{ convertTypeToString(l.Type) }}
-                    <span v-if="l.Active == 1">[{{ l.TelNo }}]</span>
-                    <span>{{ l.JobCode }}</span>
+                    <span v-if="l.Active == 1">{{ l.TelNo }}</span>
+                    <span style="padding-left:5px;">[{{ l.JobCode }}]</span><span v-if="l.Type == 'pickup'" style="padding-left:5px;">-[{{ l.OTP }}]</span>
                   </q-item-label>
                   <q-item-label caption>{{ l.StartTime | date }}</q-item-label>
                 </q-item-section>
