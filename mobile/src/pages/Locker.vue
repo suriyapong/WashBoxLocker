@@ -28,7 +28,7 @@
                     <span v-if="l.Active == 1">{{ l.TelNo }}</span>
                     <span style="padding-left:5px;" v-if="l.Type != null">{{ l.JobCode }}</span>
                   </q-item-label>
-                  <q-item-label caption>{{ l.StartTime | date }}<span v-if="l.Type == 'pickup'" style="padding-left:5px;">{{ l.OTP }}</span></q-item-label>
+                  <q-item-label caption>{{ l.StartTime | date }}<span v-if="l.Type == 'pickup'" style="padding-left:5px; color:red">{{ l.OTP }}</span></q-item-label>
                 </q-item-section>
 
                 <q-item-section side>
