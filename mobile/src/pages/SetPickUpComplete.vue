@@ -62,7 +62,7 @@ export default {
         // When you want to cancel it:
         clearInterval(handle);
         handle = 0; // I just do this so I know I've cleared the interval
-      }, 5 * 1000);
+      }, 3 * 1000);
     }
   }
 };
