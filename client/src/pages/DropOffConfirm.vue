@@ -52,7 +52,9 @@ export default {
     //--start config
     //--end config
   }),
-  async mounted() {},
+  async mounted() {
+    //this.startInterval();
+  },
   methods: {
     choose(choice) {
       if (choice == 1) {
@@ -60,6 +62,18 @@ export default {
       } else {
         this.$router.push({ path: `/` });
       }
+    },
+    startInterval() {
+      this.stop = false;
+      console.log(this.stop);
+      var x = setInterval(() => {
+        clearInterval(x);
+        this.gotoMain();
+      }, 15 * 1000);
+    },
+
+    gotoMain() {
+      this.$router.push({ path: `/` });
     }
   }
 };

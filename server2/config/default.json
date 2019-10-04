@@ -8,7 +8,7 @@
   },
   "mysql": {
     "client": "mysql2",
-    "connection": "mysql://washbox:1234@127.0.0.1:3306/washbox"
+    "connection": "mysql://washbox:Sinetong9977@27.254.174.191:3306/washbox"
   },
   "authentication": {
     "entity": "user",

@@ -3,7 +3,6 @@
     <div class="flex flex-center">
       <div class="q-pa-md" style="padding-top:400px;">
         <div class="row">
-          <p>{{ elem }}</p>
           <table align="center">
             <tbody>
               <tr>
@@ -53,8 +52,6 @@ export default {
   data: () => ({
     //--start config
     service: "locker",
-    elem: "",
-    timerId:0,
     //--end config
   }),
   mounted() {
@@ -78,23 +75,15 @@ export default {
         this.$router.push({ path: `/pickupcode` });
       }
     },
-    countdown() {
-      var timeLeft = 30;
-      if (timeLeft == -1) {
-        clearTimeout(this.timerId);
-        doSomething();
-      } else {
-        this.elem = timeLeft + " seconds remaining";
-        timeLeft--;
-      }
-      alert(this.elem);
+    startInterval() {
+      var x = setInterval(() => {
+        clearInterval(x);
+        this.gotoMain();
+      }, 30 * 1000);
     },
 
-    doSomething() {
-      alert("Hi");
-    },
-    startInterval: function() {
-      this.timerId = setInterval(this.countdown(), 1000);
+    gotoMain() {
+      this.$router.push({ path: `/` });
     }
   }
 };

@@ -13,7 +13,8 @@ import { FeathersVuexFind, FeathersVuexGet } from 'feathers-vuex'
 //const url = "http://localhost:3030/"
 //const url = "http://192.168.18.47:3030/"
 //const url = "http://localhost:3000/"
-const url = "http://192.168.1.10:3000/"
+// const url = "http://192.168.1.10:3000/"
+const url = "http://localhost:3030/"
 
 console.log(url)
 const socket = io(url, { transports: ['websocket'] })

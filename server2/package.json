@@ -40,11 +40,13 @@
     "@feathersjs/socketio": "^4.3.3",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
+    "crc-full": "^1.1.0",
     "feathers-objection": "^4.2.4",
     "helmet": "^3.21.1",
     "knex": "^0.19.4",
     "mysql2": "^1.7.0",
     "objection": "^1.6.11",
+    "serialport": "^7.1.5",
     "serve-favicon": "^2.5.0",
     "winston": "^3.2.1"
   },

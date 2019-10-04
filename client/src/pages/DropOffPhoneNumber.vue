@@ -74,11 +74,21 @@
             <!-- <div class="text-h6">แจ้งเตือน</div> -->
           </q-card-section>
 
-          <q-card-section class="text-h5">เบอร์โทรนี้ได้ทำรายการไปแล้ว<br/>กรุณาใช้เบอร์โทรศัพท์อื่น</q-card-section>
+          <q-card-section class="text-h5">
+            เบอร์โทรนี้ได้ทำรายการไปแล้ว
+            <br />กรุณาใช้เบอร์โทรศัพท์อื่น
+          </q-card-section>
 
           <q-card-actions>
             <div>
-            <q-btn  class="text-h4" flat label="OK" color="primary" v-close-popup @click="closeAlert()"/>
+              <q-btn
+                class="text-h4"
+                flat
+                label="OK"
+                color="primary"
+                v-close-popup
+                @click="closeAlert()"
+              />
             </div>
           </q-card-actions>
         </q-card>
@@ -135,7 +145,9 @@ export default {
     alert: false
     //--end config
   }),
-  async mounted() {},
+  async mounted() {
+    //this.startInterval();
+  },
   methods: {
     telephoneNo(no) {
       this.formModel.TelNo = this.formModel.TelNo + no;
@@ -181,6 +193,18 @@ export default {
       }
     },
     closeAlert() {
+      this.$router.push({ path: `/` });
+    },
+    startInterval() {
+      this.stop = false;
+      console.log(this.stop);
+      var x = setInterval(() => {
+        clearInterval(x);
+        this.gotoMain();
+      }, 15 * 1000);
+    },
+
+    gotoMain() {
       this.$router.push({ path: `/` });
     }
   }

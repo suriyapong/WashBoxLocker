@@ -46,6 +46,7 @@ export default {
   props: ["LockerNo"],
   async mounted() {
     this.lockerNo = this.LockerNo;
+    //this.startInterval();
   },
   methods: {
     ok() {
@@ -57,6 +58,18 @@ export default {
             this.$router.push({ path: `/dropoffcomplete/${this.LockerNo}` });
           }
         });
+    },
+    startInterval() {
+      this.stop = false;
+      console.log(this.stop);
+      var x = setInterval(() => {
+        clearInterval(x);
+        this.gotoMain();
+      }, 15 * 1000);
+    },
+
+    gotoMain() {
+      this.$router.push({ path: `/` });
     }
   }
 };

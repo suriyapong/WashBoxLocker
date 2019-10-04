@@ -1,9 +1,8 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="bgimg-pickup-4">
     <div class="flex flex-center">
-      <img alt="Quasar logo" src="~assets/Pickup/04-Pick-Up.png" />
       <div class="q-pa-md body">
-        <div class="row">
+        <div class="row" style="padding-top:900px;">
           <b class="text-h5 content">
             รับผ้าของคุณได้ที่ล็อคเกอร์<br/>
             หมายเลข {{ lockerNo }}<br/>
@@ -25,6 +24,14 @@
   text-align: center;
   font-size: 32px;
   color: aliceblue;
+}
+
+.bgimg-pickup-4 {
+  background: url("~assets/Pickup/04-Pick-Up.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 </style>
 

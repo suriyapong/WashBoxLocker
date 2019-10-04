@@ -46,14 +46,9 @@ exports.WashBoxService = class WashBoxService {
 
       return result;
     }
-
-        //case 6
-        if (id == "OpenLocker") {
-          let result = await this.execOpenLocker(data);
-          console.log("Status : " + result[0].Status);
-    
-          return result;
-        }
+    if (id == "OpenLocker") {
+      return await this.execOpenLocker(data);;
+    }
   }
 
   //case 1
@@ -112,12 +107,12 @@ exports.WashBoxService = class WashBoxService {
             console.log("Locker No : " + lockerNo);
           }
         }
-      }else{
+      } else {
         //lockerAvailable
         return [{ "LockerNo": -1 }];
       }
       return [{ "LockerNo": lockerNo }];
-    }else{
+    } else {
       return [{ "LockerNo": 0 }];
     }
   }
@@ -187,7 +182,7 @@ exports.WashBoxService = class WashBoxService {
     if (checkOTP.length > 0) {
       console.log("LockerID : " + JSON.stringify(checkOTP[0].LockerID));
       lockerID = checkOTP[0].LockerID;
-    }else{
+    } else {
       return [{ "LockerID": lockerID }];
     }
 
@@ -215,14 +210,6 @@ exports.WashBoxService = class WashBoxService {
     return [{ "Status": status }];
   }
 
-  //case 6
-  async execOpenLocker(data) {
-    let lockerID = data.LockerID;
-
-    console.log("open locker no : " + lockerID);
-    return [{ "lockerID": lockerID }];
-  }
-
   async execAddLog(message, telNo, lockerNo, jobCode) {
     let status = false;
     const log = require('../../models/log.model')();
@@ -235,5 +222,74 @@ exports.WashBoxService = class WashBoxService {
       status = false;
     }
     return status;
+  }
+  /*
+    list_of_values = [slaveID, 0x06, 0x00, chanel, 0x06, delay]
+    bytes_of_values = bytes(list_of_values)
+    crc16 = libscrc.modbus(bytes_of_values)
+    crc_lo = crc16 & 0x00ff
+    crc_hi = (crc16 & 0xff00) >> 8
+
+    ser = serial.Serial()
+    ser.port = config.comport
+    ser.baudrate = 9600
+    ser.bytesize = serial.EIGHTBITS
+    ser.parity = serial.PARITY_NONE
+    ser.stopbits = serial.STOPBITS_ONE
+    ser.open()
+    ser.write(serial.to_bytes([slaveID, 0x06, 0x00, chanel, 0x06, delay, crc_lo, crc_hi]))
+    ser.close()
+  */
+  async execOpenLocker(data) {
+    const lockerID = data.LockerID
+    console.log("open locker: " + lockerID)
+
+    const locker = require('../../models/locker.model')();
+
+    const mylocker = await locker.query().where('LockerID', lockerID);
+    if (mylocker.length > 0) {
+      var slaveID = mylocker[0].SlaveID;
+      var chanel = mylocker[0].Chanel;
+      var delay = 2
+      this.onRelay(slaveID, chanel, delay)
+    }
+
+
+    return { LockerID: lockerID, SlaveID: slaveID, Chanel: chanel }
+  }
+
+  onRelay(slaveID, chanel, delay) {
+
+    const CRC = require('crc-full').CRC;
+    var crc = CRC.default("CRC16_MODBUS");
+
+    var crc16 = crc.compute([slaveID, 0x06, 0x00, chanel, 0x06, delay]);
+    var crc_lo = crc16 & 0x00ff
+    var crc_hi = (crc16 & 0xff00) >> 8
+
+    var buffer = new Buffer.alloc(8);
+    buffer[0] = slaveID;
+    buffer[1] = 0x06;
+    buffer[2] = 0x00;
+    buffer[3] = chanel;
+    buffer[4] = 0x06;
+    buffer[5] = delay;
+    buffer[6] = crc_lo;
+    buffer[7] = crc_hi;
+
+    var SerialPort = require("serialport");
+
+
+    var port = new SerialPort("/dev/ttyUSB0", {
+      baudRate: 9600,
+      dataBits: 8,
+      parity: 'none',
+      stopBits: 1,
+      autoOpen: true
+    }, (err) => console.log(err))
+    port.on('open', function () {
+      port.write(buffer);
+      port.close();
+    })
   }
 }
