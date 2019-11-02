@@ -1,9 +1,9 @@
 <template>
-  <div class="bgimg-dropoff-4" style="height:100%; width:100%">
+  <div class="bgimg-dropoff-4">
     <div class="flex flex-center" style="padding-top:20px;">
       <div class="q-pa-md">
         <div class="row action" style="padding-top:175px">
-          <div class="col-5" style="padding-top:55px; padding-left:135px;">
+          <div class="col-5" style="padding-top:75px; padding-left:140px;">
             <table>
               <tbody>
                 <tr>
@@ -52,15 +52,18 @@
             </table>
           </div>
           <div class="col-7" align="center" style="padding-top:110px;">
-            <!-- <b class="text-h2" style="color:red">{{ formModel.TelNo }}</b> -->
-            <q-input
+            <b class="text-h2"  mask="##:##" style="color:red">{{ formModel.TelNo }}</b>
+            <input
               aria-describedat
               class="text-h2"
               style="padding-left:150px; visibility: hidden;"
               v-model="formModel.TelNo"
               mask="### ### ####"
-            />
-            <div class="text-h2" style="padding-left:20px; height:100px;">{{ formModel.TelNo }}</div>
+            >
+            <div
+              class="text-h2"
+              style="padding-left:0px;padding-top:10px; height:100px; font-size:70px;"
+            >{{ formModel.TelNo }}</div>
             <p style="padding-top:100px;">
               <img @click="ok()" src="../assets/DropOff/05-Drop-Off-btn1.png" />
             </p>
@@ -68,20 +71,20 @@
         </div>
       </div>
 
-      <q-dialog v-model="alert" align="center">
-        <q-card style="max-width:500px; padding:30px;">
-          <q-card-section>
+      <v-dialog v-model="alert" align="center">
+        <v-card style="max-width:500px; padding:30px;">
+          <v-card-section>
             <!-- <div class="text-h6">แจ้งเตือน</div> -->
-          </q-card-section>
+          </v-card-section>
 
-          <q-card-section class="text-h5">
+          <v-card-section class="text-h5">
             เบอร์โทรนี้ได้ทำรายการไปแล้ว
             <br />กรุณาใช้เบอร์โทรศัพท์อื่น
-          </q-card-section>
+          </v-card-section>
 
-          <q-card-actions>
+          <v-card-actions>
             <div>
-              <q-btn
+              <v-btn
                 class="text-h4"
                 flat
                 label="OK"
@@ -90,18 +93,18 @@
                 @click="closeAlert()"
               />
             </div>
-          </q-card-actions>
-        </q-card>
-      </q-dialog>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
   </div>
 </template>
 
 <style scoped>
 .action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .bgimg-dropoff-4 {
   background: url("../assets/DropOff/05-Drop-Off.png") no-repeat center center
@@ -110,6 +113,8 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100%;
+  width: 100%;
 }
 .header {
   font-size: 50px;
@@ -198,14 +203,14 @@ export default {
     closeAlert() {
       this.$router.push({ path: `/` });
     },
-    startInterval() {
-      this.stop = false;
-      console.log(this.stop);
-      var x = setInterval(() => {
-        clearInterval(x);
-        this.gotoMain();
-      }, 15 * 1000);
-    },
+    // startInterval() {
+    //   this.stop = false;
+    //   console.log(this.stop);
+    //   var x = setInterval(() => {
+    //     clearInterval(x);
+    //     this.gotoMain();
+    //   }, 15 * 1000);
+    // },
 
     gotoMain() {
       this.$router.push({ path: `/` });

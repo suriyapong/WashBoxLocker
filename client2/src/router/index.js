@@ -21,6 +21,11 @@ const routes = [
   { path: '/mainmenu', component: () => import('../views/MainMenu.vue') },
   { path: '/dropoffconfirm', component: () => import('../views/DropOffConfirm.vue') },
   { path: '/dropoffphonenumber', component: () => import('../views/DropOffPhoneNumber.vue') },
+  { path: '/dropofflockernumber/:LockerNo', props: true, component: () => import('../views/DropOffLockerNumber.vue') },
+  { path: '/dropoffcomplete/:LockerNo', props: true, component: () => import('../views/DropOffComplete.vue') },
+
+
+
 ]
 
 const router = new VueRouter({

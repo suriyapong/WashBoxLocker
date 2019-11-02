@@ -1,5 +1,5 @@
 <template>
-  <div class="bgimg-dropoff-4" style="height:100%">
+  <div class="bgimg-dropoff-4">
     <div class="flex flex-center">
       <div class="q-pa-md">
         <div class="row action">
@@ -10,7 +10,7 @@
               </tr>
               <tr>
                 <td align="center" style="padding-top:100px;">
-                  <img @click="ok()" src="~assets/DropOff/06-Drop-Off-btn1.png" />
+                  <img @click="ok()" src="../assets/DropOff/06-Drop-Off-btn1.png" />
                 </td>
               </tr>
             </tbody>
@@ -23,24 +23,25 @@
 
 <style scoped>
 .action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bgimg-dropoff-4 {
-  background: url("~assets/DropOff/06-Drop-Off.png") no-repeat center center
+  background: url("../assets/DropOff/06-Drop-Off.png") no-repeat center center
     fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100%;
+  width: 100%;
 }
 </style>
 
 <script>
-import feathersClient from "../plugins/feathers-client";
-import { mapMutations, mapState } from "vuex";
+// import feathersClient from "../plugins/feathers-client";
 
 export default {
   name: "DropOffPhoneNumber",
@@ -56,14 +57,14 @@ export default {
   },
   methods: {
     ok() {
-      feathersClient
-        .service("wash-box-service")
-        .patch("OpenLocker", { LockerID: this.LockerNo })
-        .then(no => {
-          if (no != 0) {
-            this.$router.push({ path: `/dropoffcomplete/${this.LockerNo}` });
-          }
-        });
+      // feathersClient
+      //   .service("wash-box-service")
+      //   .patch("OpenLocker", { LockerID: this.LockerNo })
+      //   .then(no => {
+      //     if (no != 0) {
+      this.$router.push({ path: `/dropoffcomplete/${this.LockerNo}` });
+      //}
+      // });
     },
     startInterval() {
       this.stop = false;
