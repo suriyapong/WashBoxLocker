@@ -1,8 +1,7 @@
 <template>
-  <q-page class="bgimg-pickup-2">
+  <div class="bgimg-pickup-2">
     <div class="flex flex-center">
-      <div class="q-pa-md">
-        <div class="row">
+        <div class="row action">
           <table>
             <tbody>
               <tr>
@@ -13,27 +12,31 @@
               </tr>
               <tr>
                 <td align="center" style="padding-top:100px; padding-left:30px;">
-                  <img @click="ok()" src="~assets/PickUp/03-Pick-Up-btn1.png" />
+                  <img @click="ok()" src="../assets/PickUp/03-Pick-Up-btn1.png" />
                 </td>
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
-      <div class="q-pa-md">
-        <div class="row" style="padding-top:550px;"></div>
       </div>
     </div>
-  </q-page>
+  </div>
 </template>
 
 <style scoped>
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .bgimg-pickup-2 {
-  background: url("~assets/PickUp/03-Pick-Up.png") no-repeat center center fixed;
+  background: url("../assets/PickUp/03-Pick-Up.png") no-repeat center center
+    fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100%;
+  width: 100%;
 }
 </style>
 
@@ -74,16 +77,16 @@ export default {
         .then(result => {
           console.log(result[0].Status);
           if (result[0].Status) {
-            feathersClient
-              .service("wash-box-service")
-              .patch("OpenLocker", { LockerID: this.lockerNo })
-              .then(no => {
-                if (no != 0) {
+            // feathersClient
+            //   .service("wash-box-service")
+            //   .patch("OpenLocker", { LockerID: this.lockerNo })
+            //   .then(no => {
+            //     if (no != 0) {
                   this.$router.push({
                     path: `/pickupcomplete/${this.lockerNo}`
                   });
-                }
-              });
+              //   }
+              // });
           } else {
             this.$router.push({ path: `/` });
           }

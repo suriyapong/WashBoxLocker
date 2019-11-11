@@ -23,8 +23,10 @@ const routes = [
   { path: '/dropoffphonenumber', component: () => import('../views/DropOffPhoneNumber.vue') },
   { path: '/dropofflockernumber/:LockerNo', props: true, component: () => import('../views/DropOffLockerNumber.vue') },
   { path: '/dropoffcomplete/:LockerNo', props: true, component: () => import('../views/DropOffComplete.vue') },
-
-
+  { path: '/pickupcode', component: () => import('../views/PickUpCode.vue') },
+  { path: '/pickuplockernumber/:LockerNo', props: true, component: () => import('../views/PickUpLockerNumber.vue') },
+  { path: '/pickupcomplete/:LockerNo', props: true, component: () => import('../views/PickUpComplete.vue') },
+  
 
 ]
 

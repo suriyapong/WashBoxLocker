@@ -1,23 +1,30 @@
 <template>
-  <q-page class="bgimg-pickup-4">
-    <div class="flex flex-center">
-      <div class="q-pa-md body">
-        <div class="row" style="padding-top:900px;">
+  <div class="bgimg-pickup-4">
+    <div class="flex flex-center body">
+      <div class="q-pa-md">
+        <div class="row action" style="padding-top:0px;">
           <b class="text-h5 content">
-            รับผ้าของคุณได้ที่ล็อคเกอร์<br/>
-            หมายเลข {{ lockerNo }}<br/>
+            รับผ้าของคุณได้ที่ล็อคเกอร์
+            <br />
+            หมายเลข {{ lockerNo }}
+            <br />
             Get your items at the lockers Number {{ lockerNo }}
           </b>
         </div>
       </div>
     </div>
-  </q-page>
+  </div>
 </template>
 
 <style scoped>
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .body {
-  position: absolute;
-  padding-top: 400px;
+  padding-top: 500px;
   font-size: 60px;
 }
 .content {
@@ -27,11 +34,14 @@
 }
 
 .bgimg-pickup-4 {
-  background: url("~assets/Pickup/04-Pick-Up.png") no-repeat center center fixed;
+  background: url("../assets/PickUp/04-Pick-Up.png") no-repeat center center
+    fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100%;
+  width: 100%;
 }
 </style>
 
@@ -43,7 +53,7 @@ export default {
     lockerNo: ""
     //--end config
   }),
-    props: ["LockerNo"],
+  props: ["LockerNo"],
   async mounted() {
     this.lockerNo = this.LockerNo;
     this.startInterval();
@@ -56,7 +66,7 @@ export default {
         // When you want to cancel it:
         clearInterval(handle);
         handle = 0; // I just do this so I know I've cleared the interval
-      }, 10*1000);
+      }, 10 * 1000);
     }
   }
 };

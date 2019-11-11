@@ -1,8 +1,8 @@
 <template>
   <div class="bgimg-dropoff-5">
-    <div class="flex flex-center">
-      <div class="q-pa-md body">
-        <div class="row" align="center" style="padding-top:100px;">
+    <div class="flex flex-center body">
+      <div class="q-pa-md">
+        <div class="row action">
           <b class="text-h5 content">
             กรุณานำผ้าไปใส่ในช่อง {{ lockerNo }} แล้วกรอกจำนวนผ้าในใบงาน
             <br />ที่อยู่ในช่องล๊อคเกอร์
@@ -16,9 +16,14 @@
 </template>
 
 <style scoped>
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .body {
-  position: absolute;
-  padding-top: 400px;
+  padding-top: 500px;
   font-size: 60px;
 }
 .content {

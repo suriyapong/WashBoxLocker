@@ -2,7 +2,7 @@
   <div class="bgimg-dropoff-4">
     <div class="flex flex-center" style="padding-top:20px;">
       <div class="q-pa-md">
-        <div class="row action" style="padding-top:175px">
+        <div class="row action" style="width:1210px; padding-top:175px">
           <div class="col-5" style="padding-top:75px; padding-left:140px;">
             <table>
               <tbody>
@@ -52,7 +52,6 @@
             </table>
           </div>
           <div class="col-7" align="center" style="padding-top:110px;">
-            <b class="text-h2"  mask="##:##" style="color:red">{{ formModel.TelNo }}</b>
             <input
               aria-describedat
               class="text-h2"
@@ -62,26 +61,23 @@
             >
             <div
               class="text-h2"
-              style="padding-left:0px;padding-top:10px; height:100px; font-size:70px;"
+              style="padding-left:100px;padding-top:10px; height:100px; font-size:70px;"
             >{{ formModel.TelNo }}</div>
-            <p style="padding-top:100px;">
+            <p style="padding-left:100px;padding-top:100px;">
               <img @click="ok()" src="../assets/DropOff/05-Drop-Off-btn1.png" />
             </p>
           </div>
         </div>
       </div>
 
-      <v-dialog v-model="alert" align="center">
+      <!-- <v-dialog v-model="alert" align="center">
         <v-card style="max-width:500px; padding:30px;">
           <v-card-section>
-            <!-- <div class="text-h6">แจ้งเตือน</div> -->
           </v-card-section>
-
           <v-card-section class="text-h5">
             เบอร์โทรนี้ได้ทำรายการไปแล้ว
             <br />กรุณาใช้เบอร์โทรศัพท์อื่น
           </v-card-section>
-
           <v-card-actions>
             <div>
               <v-btn
@@ -95,7 +91,22 @@
             </div>
           </v-card-actions>
         </v-card>
-      </v-dialog>
+      </v-dialog> -->
+
+      <v-row justify="center">
+        <v-dialog v-model="alert" persistent max-width="300px;">
+          <v-card style="padding:20px;">
+            <v-card-text align="center" style="font-size:25px;">
+             เบอร์โทรนี้ได้ทำรายการไปแล้ว
+            <br />กรุณาใช้เบอร์โทรศัพท์อื่น
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" text @click="closeAlert()">OK</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
     </div>
   </div>
 </template>
