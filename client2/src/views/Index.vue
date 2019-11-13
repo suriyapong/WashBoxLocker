@@ -1,5 +1,7 @@
 <template>
   <div class="bgimg-dropoff-1" @click="nextPage()" style="height:100%">
+
+    <v-btn>OK</v-btn>
   </div>
 </template>
 
@@ -12,6 +14,8 @@
   -o-background-size: cover;
   background-size: cover;
 }
+
+
 </style>
 
 <script>
