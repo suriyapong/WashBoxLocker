@@ -16,6 +16,7 @@
                 </td>
                 <td align="center">
                   <img
+                    v-if="Cando2('update','Department')"
                     @click="choose(2)"
                     alt="Quasar logo"
                     src="../assets/DropOff/02-Drop-Off-btn2.png"
@@ -95,6 +96,11 @@ export default {
 
     Cando(action, object) {
       const userlogin = 1;
+      var Ican = this.$can(action, { type: object, RoleId: userlogin });
+      return Ican;
+    },
+    Cando2(action, object) {
+      const userlogin = 2;
       var Ican = this.$can(action, { type: object, RoleId: userlogin });
       return Ican;
     }

@@ -9,12 +9,10 @@ function subjectName(item) {
   }
   console.log(item)
   return item.type;
- 
 }
 
 export default AbilityBuilder.define({ subjectName }, can => {
- 
   can(["read", "create"], "Company");  
   can(['update', 'delete'], "Company", {RoleId:1}); 
-  
+  can(['update', 'delete'], "Department", {RoleId:2});
 });
