@@ -70,28 +70,20 @@
         </div>
       </div>
 
-      <!-- <v-dialog v-model="alert" align="center">
-        <v-card style="max-width:500px; padding:30px;">
-          <v-card-section>
-          </v-card-section>
-          <v-card-section class="text-h5">
-            เบอร์โทรนี้ได้ทำรายการไปแล้ว
+      <!-- <v-row justify="center">
+        <v-dialog v-model="alert" persistent max-width="300px;">
+          <v-card style="padding:20px;">
+            <v-card-text align="center" style="font-size:25px;">
+             เบอร์โทรนี้ได้ทำรายการไปแล้ว
             <br />กรุณาใช้เบอร์โทรศัพท์อื่น
-          </v-card-section>
-          <v-card-actions>
-            <div>
-              <v-btn
-                class="text-h4"
-                flat
-                label="OK"
-                color="primary"
-                v-close-popup
-                @click="closeAlert()"
-              />
-            </div>
-          </v-card-actions>
-        </v-card>
-      </v-dialog> -->
+            </v-card-text>
+            cd <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" text @click="closeAlert()">OK</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row> -->
 
       <v-row justify="center">
         <v-dialog v-model="alert" persistent max-width="300px;">

@@ -8,6 +8,7 @@
               <tr>
                 <td align="center">
                   <img
+                    v-if="Cando('update','Company')"
                     @click="choose(1)"
                     alt="Quasar logo"
                     src="../assets/DropOff/02-Drop-Off-btn1.png"
@@ -31,9 +32,9 @@
 
 <style scoped>
 .action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 td {
@@ -57,7 +58,7 @@ import feathersClient from "../plugins/feathers-client";
 export default {
   data: () => ({
     //--start config
-    service: "locker",
+    service: "locker"
     //--end config
   }),
   mounted() {
@@ -90,6 +91,12 @@ export default {
 
     gotoMain() {
       this.$router.push({ path: `/` });
+    },
+
+    Cando(action, object) {
+      const userlogin = 1;
+      var Ican = this.$can(action, { type: object, RoleId: userlogin });
+      return Ican;
     }
   }
 };
