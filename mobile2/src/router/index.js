@@ -1,23 +1,34 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    component: () => import('../layouts/LoginLayout.vue'),
+    children: [
+      { path: '', component: () => import('../views/Login.vue') },
+      { path: 'login', component: () => import('../views/Login.vue') },
+    ]
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/',
+    component: () => import('../layouts/StaffLayout.vue'),
+    children: [
+      { path: 'locker', component: () => import('../views/Locker.vue') },
+      // { path: 'clearlockerdropoff/:LockerID', name: 'ClearLockerDropOff', props: true, component: () => import('pages/ClearLockerDropOff.vue') },
+      // { path: 'clearlockerdropoffcomplete/:LockerID', name: 'ClearLockerDropOffComplete', props: true, component: () => import('pages/ClearLockerDropOffComplete.vue') },
+    
+      // { path: 'setpickup/:LockerID', name: 'SetPickUp', props: true, component: () => import('pages/SetPickUp.vue') },
+      // { path: 'setpickupcomplete/:LockerID', name: 'SetPickUpComplete', props: true, component: () => import('pages/SetPickUpComplete.vue') },
+      // { path: 'clearpickupcomplete/:LockerID', name: 'ClearPickUpComplete', props: true, component: () => import('pages/ClearPickUpComplete.vue') },
+
+      // { path: 'openlocker', name: 'ClearPickUpComplete', component: () => import('pages/OpenLocker.vue') },
+    ]
   }
+
+  
 ]
 
 const router = new VueRouter({
