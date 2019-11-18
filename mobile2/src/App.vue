@@ -1,7 +1,8 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <!-- <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
+         <v-icon>mdi-open-in-new</v-icon>
         <v-img
           alt="Vuetify Logo"
           class="shrink mr-2"
@@ -19,10 +20,12 @@
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
-    </v-app-bar>
+    </v-app-bar> -->
 
     <v-content>
+      <!-- <Navbar></Navbar> -->
       <!-- <HelloWorld/> -->
+      
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -30,6 +33,8 @@
 
 <script>
 // import HelloWorld from "./components/HelloWorld";
+
+import Navbar from "./components/Navbar";
 
 export default {
   name: "App",
@@ -40,6 +45,9 @@ export default {
 
   data: () => ({
     //
-  })
+  }),
+  components: {
+    Navbar,
+  },
 };
 </script>

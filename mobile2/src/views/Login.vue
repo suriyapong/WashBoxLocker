@@ -2,15 +2,15 @@
   <q-page padding>
     <div class="absolute-center text-left">
       <div class="floating-label">
-        <v-card class="mx-auto my-12 text-xs-center" max-width="600">
+        <v-card class="mx-auto my-12 text-xs-center" max-width="400">
           <v-card-title primary-title class="justify-left" color="text-primary">Login</v-card-title>
           <v-card-text>
             <v-row align="center" justify="center">
-              <v-img src="..\assets\img\logo-washbox.png" max-width="250" />
+              <v-img src="..\assets\img\logo-washbox.png" max-width="150" />
             </v-row>
             <v-row>
               <v-col cols="12" sm="12">
-                <v-text-field label="username" value hint outlined v-model="username"></v-text-field>
+                <v-text-field label="username" value hint outlined v-moel="username"></v-text-field>
               </v-col>
 
               <v-col cols="12" sm="12">

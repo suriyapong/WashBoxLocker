@@ -1,95 +1,63 @@
 <template>
-  <v-layout view="hHh lpR fFf">
-    <v-header elevated>
-      <v-toolbar>
-        <!-- <v-toolbar-title class="absolute-center">Wash Box</v-toolbar-title> -->
-        <v-btn
-          flat
-          color="white"
-          icon-right="account_circle"
-          label="Logout"
-          @click="logout"
-          class="absolute-right"
-        >Logout</v-btn> 
-      </v-toolbar>
-    </v-header>
-    <v-footer>
-      <v-tabs>
-        <v-route-tab
-          v-for="nav in navs"
-          :key="nav.lable"
-          :icon="nav.icon"
-          
-          :to="nav.to"
-        />
-      </v-tabs>
-    </v-footer>
-    <v-drawer
-      v-model="leftDrawerOpen"
-      :breakpoint="767"
-      :width="250"
-      bordered
-      content-class="bg-primary"
-    >
-      <v-list>
-        <v-item
-          v-for="nav in navs"
-          class="text-white"
-          :to="nav.to"
-          exact
-          clickable
-          :key="nav.lable"
-        >
-          <v-item-section avatar>
-            <v-icon :name="nav.icon" />
-          </v-item-section>
-          <v-item-section>
-            <v-item-label>{{nav.lable}}</v-item-label>
-          </v-item-section>
-        </v-item>
-      </v-list>
-    </v-drawer>
+  <v-card class="mx-auto overflow-hidden" height="100%">
+    <v-system-bar color="indigo darken-1"></v-system-bar>
 
-    <v-page-container>
-      <router-view />
-    </v-page-container>
-  </v-layout>
+    <v-app-bar color="indigo accent-4" dark prominent>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title>Wash Box Locker</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn @click="logout" text>
+        <span class="mr-2">Logout</span>
+        <v-icon>mdi-logout</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" absolute bottom temporary>
+      <v-list nav dense>
+        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
+          <v-list-item @click="Locker()">
+            <v-list-item-title>Locker</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="OpenLocker()">
+            <v-list-item-title>Open Locker</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-card-text>
+      <router-view></router-view>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
-
 export default {
-  name: "StaffLayout",
-  data() {
-    return {
-      leftDrawerOpen: this.$q.platform.is.desktop,
-      navs: [
-        {
-          lable: "Locker",
-          icon: "description",
-          to: "/locker"
-        },
-                {
-          lable: "Open locker",
-          icon: "description",
-          to: "/openlocker"
-        }
-      ]
-    };
+  data: () => ({
+    drawer: false,
+    group: null
+  }),
+
+  watch: {
+    group() {
+      this.drawer = false;
+    }
   },
   methods: {
-    async logout(){
-      await this.$store.dispatch('auth/logout');
-      this.$router.push('/login');
+    Locker() {
+       this.$router.push("/locker");
     },
+    OpenLocker() {
+       this.$router.push("/openlocker");
+    },
+    async logout() {
+      // await this.$store.dispatch('auth/logout');
+      this.$router.push("/login");
+    }
   }
 };
 </script>
-
-<style>
-@media screen and (min-width: 768px) {
-  .q-footer {
-    display: none;
-  }
-}
-</style>
